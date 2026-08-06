@@ -24,3 +24,17 @@ operacionais e evitar paradas não planejadas.
 - Registro de Horímetro (horas trabalhadas)
 - Registro de Abastecimento e Consumo de Combustível
 - Alertas de Manutenção Preventiva
+
+## 📐 Arquitetura do Sistema
+
+### Diagrama de Contexto (C4 Nível 1)
+![Diagrama de Contexto](contexto.png)
+
+### Diagrama de Contêiner (C4 Nível 2)
+![Diagrama de Contêiner](conteiner.png)
+
+### Modelo do Banco de Dados (DER)
+![Modelo ER](banco.png)
+
+### Fluxograma do Processo
+![Fluxograma](fluxo_manutencao.png)
