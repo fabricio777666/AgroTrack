@@ -1,0 +1,16 @@
+@startuml
+title Fluxograma de Processo - Alerta de Manutenção AgroTrack
+
+start
+:Operador insere as horas trabalhadas no sistema;
+:Sistema soma as horas atuais com o histórico da máquina;
+if (Horas Totais >= Limite de Troca de Óleo?) then (Sim)
+:Sistema gera um Alerta de Manutenção Crítico;
+:Notifica o Produtor Rural (Dashboard);
+else (Não)
+:Sistema apenas salva o registro no banco;
+endif
+:Fim do Processo;
+stop
+
+@enduml
