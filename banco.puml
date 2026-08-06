@@ -1,0 +1,23 @@
+@startuml
+title Modelo de Banco de Dados (DER) - AgroTrack
+
+entity "Maquinario" as maq {
+  * id_maquina : Inteiro <<Chave Primária>>
+  --
+  nome : Texto
+  modelo : Texto
+  marca : Texto
+  ano : Inteiro
+}
+
+entity "Registro_Horimetro" as reg {
+  * id_registro : Inteiro <<Chave Primária>>
+  --
+  id_maquina : Inteiro <<Chave Estrangeira>>
+  horas_trabalhadas : Decimal
+  data_registro : Data
+}
+
+maq ||--o{ reg : "Possui vários"
+
+@enduml
