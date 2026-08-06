@@ -1,0 +1,17 @@
+@startuml
+!include <C4/C4_Context>
+
+title Diagrama de Contexto (C4 Nível 1) - AgroTrack
+
+Person(produtor, "Produtor Rural", "Dono ou gestor da fazenda. Precisa controlar os custos, agendar manutenções e evitar quebras no maquinário.")
+Person(operador, "Operador de Máquina", "Funcionário que opera os tratores e colheitadeiras no dia a dia.")
+
+System(agrotrack, "AgroTrack", "Sistema de diário de bordo e controle de custo operacional de maquinário agrícola.")
+
+System_Ext(banco, "Instituição Financeira", "Exige relatórios de manutenção em dia para manter linhas de crédito rural ativas.")
+
+Rel(produtor, agrotrack, "Cadastra maquinário, monitora custos e recebe alertas")
+Rel(operador, agrotrack, "Registra horas trabalhadas (horímetro) e consumo de combustível")
+Rel(agrotrack, banco, "Gera histórico confiável de manutenção para auditoria")
+
+@enduml
