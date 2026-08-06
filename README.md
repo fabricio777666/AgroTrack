@@ -15,11 +15,10 @@ com base no tempo de uso — ajudando o produtor a reduzir custos
 operacionais e evitar paradas não planejadas.
 
 ## 👥 Integrantes do Grupo
-- Nome Completo 1
-- Nome Completo 2
-- Nome Completo 3
-- Nome Completo 4
-
+- Fabricio Marques da Cunha
+- Eduardo Fernandes Silva
+- Ian Gustavo Sanajiotto Dias
+- Hiago Rafael Fernandes do Amaral
 ## 🛠️ Funcionalidades Principais
 - Cadastro de Maquinário
 - Registro de Horímetro (horas trabalhadas)
