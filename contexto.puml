@@ -1,5 +1,5 @@
-@startuml
-!include <C4/C4_Context>
+@startuml contexto
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 title Diagrama de Contexto (C4 Nível 1) - AgroTrack
 
