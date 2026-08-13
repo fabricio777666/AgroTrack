@@ -5,3 +5,70 @@
     --text-main: #ecf0f1;
     --text-muted: #95a5a6;
 }
+.relatorio-header {
+    color: #1b5e20;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #2e7d32;
+    padding-bottom: 10px;
+}
+
+.relatorio-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.relatorio-table thead {
+    background-color: #2e7d32;
+    color: white;
+}
+
+.relatorio-table th, 
+.relatorio-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.relatorio-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.relatorio-table tbody tr:hover {
+    background-color: #f1f8e9;
+    transition: background-color 0.3s ease;
+}
+
+.relatorio-table td strong {
+    color: #1b5e20;
+    font-size: 1.1rem;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: inline-block;
+    text-align: center;
+}
+
+.status-danger {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.status-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
