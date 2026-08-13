@@ -1,4 +1,4 @@
-@startuml
+@startuml banco
 title Modelo de Banco de Dados (DER) - AgroTrack
 
 entity "Maquinario" as maq {
