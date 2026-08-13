@@ -1,4 +1,5 @@
-@startuml banco
+@startuml banco 
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 title Modelo de Banco de Dados (DER) - AgroTrack
 
 entity "Maquinario" as maq {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Custos - AgroTrack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>📊 Relatório de Custos e Alertas de Manutenção</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Máquina</th>
+                <th>Horas Trabalhadas</th>
+                <th>Custo Total (R$)</th>
+                <th>Custo por Hora (R$)</th>
+                <th>Horímetro Atual</th>
+                <th>Status Manutenção</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in maquinas %}
+            <tr>
+                <td>{{ m.nome }}</td>
+                <td>{{ m.total_horas }} h</td>
+                <td>R$ {{ "%.2f"|format(m.custo_combustivel) }}</td>
+                <td><strong>R$ {{ "%.2f"|format(m.custo_por_hora) }}</strong></td>
+                <td>{{ m.horimetro_atual }} h</td>
+                <td>
+                    {% if m.alerta_manutencao %}
+                        <span style="color: red; font-weight: bold;"> REVISÃO NECESSÁRIA</span>
+                    {% else %}
+                        <span style="color: green; font-weight: bold;">✓ Em dia</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
