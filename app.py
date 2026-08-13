@@ -20,4 +20,4 @@ if __name__ == '__main__':
 
         return "Uso registrado com sucesso!"
 
-        return render_template('registrar_uso.html')
+        return render_template('registrar_uso.htm   l')
