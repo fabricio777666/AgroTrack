@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Relatórios & Custos - AgroTrack{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Relatório de Custos e Alertas</h1>
+    <p>Acompanhe a média de consumo (L/h), custo por hora e alertas automáticos de manutenção preventivas.</p>
+</div>
+
+<div class="table-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Máquina</th>
+                <th>Horímetro Total</th>
+                <th>Consumo Médio (L/h)</th>
+                <th>Custo Estimado/h (R$)</th>
+                <th>Próxima Revisão</th>
+                <th>Alerta de Manutenção</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Trator 01</td>
+                <td>1.450h</td>
+                <td>14.2 L/h</td>
+                <td>R$ 85,20 /h</td>
+                <td>1.500h</td>
+                <td><span class="badge badge-ok">Em Dia</span></td>
+            </tr>
+            <tr>
+                <td>Colheitadeira 02</td>
+                <td>2.100h</td>
+                <td>28.5 L/h</td>
+                <td>R$ 171,00 /h</td>
+                <td>2.120h</td>
+                <td><span class="badge badge-atencao">Manutenção Próxima (20h)</span></td>
+            </tr>
+            <tr>
+                <td>Trator 03</td>
+                <td>3.050h</td>
+                <td>18.0 L/h</td>
+                <td>R$ 108,00 /h</td>
+                <td>3.000h</td>
+                <td><span class="badge badge-critico">REVISÃO VENCIDA!</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

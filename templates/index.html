@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - AgroTrack{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Visão Geral da Frota</h1>
+    <p>Acompanhe o desempenho, horas trabalhadas e alertas de manutenção da sua propriedade.</p>
+</div>
+
+<div class="dashboard-grid">
+    <div class="card">
+        <h3>Máquinas Cadastradas</h3>
+        <p class="numero">8</p>
+    </div>
+    <div class="card">
+        <h3>Horas Totais (Safra)</h3>
+        <p class="numero">1,240h</p>
+    </div>
+    <div class="card alerta-warning">
+        <h3>Atenção Manutenção</h3>
+        <p class="numero">2</p>
+    </div>
+    <div class="card alerta-danger">
+        <h3>Revisão Vencida</h3>
+        <p class="numero">1</p>
+    </div>
+</div>
+<div class="table-card">
+    <h2>Status Rápido dos Maquinários</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Máquina</th>
+                <th>Marca / Modelo</th>
+                <th>Horímetro Atual</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Trator 01</td>
+                <td>John Deere 6135J</td>
+                <td>1.450h</td>
+                <td><span class="badge badge-ok">Operacional</span></td>
+            </tr>
+            <tr>
+                <td>Colheitadeira 02</td>
+                <td>New Holland CR 7.90</td>
+                <td>2.100h</td>
+                <td><span class="badge badge-atencao">Manutenção Próxima</span></td>
+            </tr>
+            <tr>
+                <td>Trator 03</td>
+                <td>Massey Ferguson 7719</td>
+                <td>3.050h</td>
+                <td><span class="badge badge-critico">Manutenção Vencida</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

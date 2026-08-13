@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrar Uso - AgroTrack{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Diário de Bordo & Abastecimento</h1>
+    <p>Lance as horas rodadas no dia e o consumo de combustível de cada máquina.</p>
+</div>
+
+<div class="form-card">
+    <form action="{{ url_for('registrar') }}" method="POST">
+        <div class="form-group">
+            <label for="maquina">Selecione a Máquina</label>
+            <select id="maquina" name="maquina_id" required>
+                <option value="">Escolha o maquinário...</option>
+                <option value="1">Trator 01 - John Deere 6135J</option>
+                <option value="2">Colheitadeira 02 - New Holland CR 7.90</option>
+                <option value="3">Trator 03 - Massey Ferguson 7719</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="data">Data da Operação</label>
+            <input type="date" id="data" name="data" required>
+        </div>
+
+        <div class="form-group">
+            <label for="horas">Horas Trabalhadas no Dia (h)</label>
+            <input type="number" step="0.1" id="horas" name="horas" placeholder="Ex: 8.5" required>
+        </div>
+
+        <div class="form-group">
+            <label for="combustivel">Combustível Abastecido (Litros)</label>
+            <input type="number" step="0.1" id="combustivel" name="combustivel" placeholder="Ex: 120.0" required>
+        </div>
+
+        <div class="form-group">
+            <label for="observacoes">Atividade Realizada / Observações</label>
+            <textarea id="observacoes" name="observacoes" rows="3" placeholder="Ex: Plantio de soja no Talhão 4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Registro</button>
+    </form>
+</div>
+{% endblock %}

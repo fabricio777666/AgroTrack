@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AgroTrack - Gestão Agrícola{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            🚜 <span>AgroTrack</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">Dashboard</a></li>
+                <li><a href="{{ url_for('cadastrar') }}" class="{% if request.endpoint == 'cadastrar' %}active{% endif %}">Cadastrar Máquina</a></li>
+                <li><a href="{{ url_for('registrar') }}" class="{% if request.endpoint == 'registrar' %}active{% endif %}">Registrar Uso</a></li>
+                <li><a href="{{ url_for('relatorio') }}" class="{% if request.endpoint == 'relatorio' %}active{% endif %}">Relatórios</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2026 AgroTrack - Sistema de Diário de Bordo e Custo Operacional</p>
+    </footer>
+
+</body>
+</html>

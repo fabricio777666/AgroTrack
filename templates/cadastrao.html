@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastrar Máquina - AgroTrack{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Cadastro de Maquinário</h1>
+    <p>Registre novos tratores, colheitadeiras e pulverizadores na sua frota.</p>
+</div>
+
+<div class="form-card">
+    <form action="{{ url_for('cadastrar') }}" method="POST">
+        <div class="form-group">
+            <label for="nome">Nome / Identificação da Máquina</label>
+            <input type="text" id="nome" name="nome" placeholder="Ex: Trator 01 - Talhão Norte" required>
+        </div>
+
+        <div class="form-group">
+            <label for="marca">Marca e Modelo</label>
+            <input type="text" id="marca" name="marca" placeholder="Ex: John Deere 6135J" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipo">Tipo de Maquinário</label>
+            <select id="tipo" name="tipo" required>
+                <option value="">Selecione...</option>
+                <option value="Trator">Trator</option>
+                <option value="Colheitadeira">Colheitadeira</option>
+                <option value="Pulverizador">Pulverizador</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="horimetro">Horímetro Inicial (Horas de Uso)</label>
+            <input type="number" step="0.1" id="horimetro" name="horimetro" placeholder="Ex: 1250.5" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cadastrar Máquina</button>
+    </form>
+</div>
+{% endblock %}
