@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard Mestre - AgroTrack{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    
+    <div class="dashboard-header page-header">
+        <h1>Dashboard Mestre</h1>
+        <div class="header-actions">
+            <span class="text-muted">Acompanhamento em Tempo Real</span>
+        </div>
+    </div>
+
+    <div class="row kpi-row">
+        <div class="col-kpi">
+            <div class="card kpi-card">
+                <h3>Frota Ativa</h3>
+                <p class="numero">12 <span>Máquinas</span></p>
+            </div>
+        </div>
+        <div class="col-gauge">
+            <div class="card kpi-card gauge-card">
+                <h3>Horas Totais (Safra)</h3>
+                <div class="gauge-placeholder">
+                    <span class="gauge-value">3,150h</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-chart-donut">
+            <div class="card chart-card">
+                <h3>Distribuição da Frota</h3>
+                <div class="chart-container-donut">
+                    <div class="donut-placeholder"></div>
+                    <ul class="chart-legend">
+                        <li><span class="dot trator"></span> 6 Tratores</li>
+                        <li><span class="dot colheitadeira"></span> 3 Colheitadeiras</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row main-charts-row">
+        <div class="col-chart-bars">
+            <div class="card chart-card">
+                <h3>Cadastro de Maquinário (Horas)</h3>
+                <div class="chart-placeholder-bars">
+                </div>
+            </div>
+        </div>
+        <div class="col-chart-line">
+            <div class="card chart-card">
+                <h3>Tendência de Consumo de Combustível (L/h)</h3>
+                <div class="chart-placeholder-line">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row alerts-status-row">
+        <div class="col-alerts">
+            <div class="card alerts-card">
+                <h3>⚠️ ALERTAS DE MANUTENÇÃO</h3>
+                <table class="data-table alerts-table">
+                    <thead>
+                        <tr>
+                            <th>Prioridade</th>
+                            <th>Maquinário</th>
+                            <th>Manutenção</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="alert-critical">
+                            <td><span class="badge badge-critico">1</span></td>
+                            <td>Colheitadeira 03 - New Holland</td>
+                            <td>Revisão Crítica (10h restantes)</td>
+                            <td><button class="btn-sm btn-danger">Agendar</button></td>
+                        </tr>
+                        <tr class="alert-warning">
+                            <td><span class="badge badge-atencao">2</span></td>
+                            <td>Trator 01 - John Deere</td>
+                            <td>Troca de Óleo (25h restantes)</td>
+                            <td><button class="btn-sm btn-warning">Agendar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-status">
+            <div class="card status-card">
+                <h3>Status em Campo</h3>
+                <ul class="status-list">
+                    <li>Trator 01 <span class="status-dot operacional"></span></li>
+                    <li>Colheitadeira 02 <span class="status-dot manutencao"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row costs-highlights-row">
+        <div class="col-costs">
+            <div class="card costs-card">
+                <h3>Custo por Hora (Média Geral)</h3>
+                <p class="numero-lg">R$ 112,40</p>
+                <a href="{{ url_for('relatorio') }}" class="btn-sm btn-success">Relatório Completo</a>
+            </div>
+        </div>
+        <div class="col-highlights">
+            <div class="card highlights-card">
+                <h3>Destaques Operacionais</h3>
+                <div class="highlight-item">
+                    <span class="icon">🚜</span>
+                    <p>Máquina mais Eficiente: Trator 01 (14.2 L/h)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
