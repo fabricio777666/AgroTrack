@@ -5,6 +5,7 @@
 {% block content %}
 <div class="dashboard-container">
     
+    <!-- CABEÇALHO DO DASHBOARD -->
     <div class="dashboard-header page-header">
         <h1>Dashboard Mestre</h1>
         <div class="header-actions">
@@ -12,7 +13,8 @@
         </div>
     </div>
 
-    <div class="row kpi-row"></div>
+    <!-- 1ª LINHA: KPIs PRINCIPAIS E DISTRIBUIÇÃO -->
+    <div class="row kpi-row">
         <div class="col-kpi">
             <div class="card kpi-card">
                 <h3>Frota Ativa</h3>
@@ -23,6 +25,7 @@
             <div class="card kpi-card gauge-card">
                 <h3>Horas Totais (Safra)</h3>
                 <div class="gauge-placeholder">
+                    <!-- Aqui entraria um gráfico de gauge visual -->
                     <span class="gauge-value">3,150h</span>
                 </div>
             </div>
@@ -31,6 +34,7 @@
             <div class="card chart-card">
                 <h3>Distribuição da Frota</h3>
                 <div class="chart-container-donut">
+                    <!-- Gráfico de Rosca (via CSS ou Chart.js) -->
                     <div class="donut-placeholder"></div>
                     <ul class="chart-legend">
                         <li><span class="dot trator"></span> 6 Tratores</li>
@@ -40,11 +44,14 @@
             </div>
         </div>
     </div>
+
+    <!-- 2ª LINHA: GRÁFICOS DE TENDÊNCIA E BARRAS -->
     <div class="row main-charts-row">
         <div class="col-chart-bars">
             <div class="card chart-card">
                 <h3>Cadastro de Maquinário (Horas)</h3>
                 <div class="chart-placeholder-bars">
+                    <!-- Gráfico de Barras -->
                 </div>
             </div>
         </div>
@@ -52,10 +59,13 @@
             <div class="card chart-card">
                 <h3>Tendência de Consumo de Combustível (L/h)</h3>
                 <div class="chart-placeholder-line">
+                    <!-- Gráfico de Linha -->
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- 3ª LINHA: ALERTAS E STATUS EM CAMPO -->
     <div class="row alerts-status-row">
         <div class="col-alerts">
             <div class="card alerts-card">
@@ -96,6 +106,8 @@
             </div>
         </div>
     </div>
+
+    <!-- 4ª LINHA: CUSTOS E DESTAQUES -->
     <div class="row costs-highlights-row">
         <div class="col-costs">
             <div class="card costs-card">
