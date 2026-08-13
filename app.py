@@ -14,10 +14,11 @@ if __name__ == '__main__':
     @app.route('/registrar', methods=['GET', 'POST'])
     def registrar():
         if request.method == 'POST':
+            maquina = request.form['maquina']
             data = request.form['data']
             horas = request.form['horas']
             combustivel = request.form['combustivel']
 
-        return "Uso registrado com sucesso!"
+            return "Uso registrado com sucesso!"
 
-        return render_template('registrar_uso.htm   l')
+        return render_template('registrar_uso.html')
