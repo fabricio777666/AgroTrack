@@ -1,0 +1,29 @@
+#teste#
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Maquinário - AgroTrack</title>
+</head>
+<body>
+    <h1>🚜 Cadastrar Novo Maquinário</h1>
+    
+    <form action="/cadastrar" method="POST">
+        <label for="nome">Nome/Modelo da Máquina:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="marca">Marca:</label><br>
+        <input type="text" id="marca" name="marca" required><br><br>
+
+        <label for="horimetro">Horímetro Inicial (horas):</label><br>
+        <input type="number" id="horimetro" name="horimetro" required><br><br>
+
+        <button type="submit">Salvar Máquina</button>
+    </form>
+
+    <br>
+    <a href="/">Voltar para a Home</a>
+</body>
+</html>
