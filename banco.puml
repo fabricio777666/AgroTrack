@@ -18,6 +18,6 @@ entity "Registro_Horimetro" as reg {
   data_registro : Data
 }
 
-maq ||--o{ reg : "Possui vários"
+maq ||--o reg : "Possui vários"
 
 @enduml
