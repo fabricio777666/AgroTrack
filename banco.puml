@@ -13,6 +13,8 @@ entity "Maquinario" as maq {
 
 entity "Registro_Horimetro" as reg {
   * id_registro : Inteiro <<Chave Primária>>
+
+
   --
   id_maquina : Inteiro <<Chave Estrangeira>>
   horas_trabalhadas : Decimal
