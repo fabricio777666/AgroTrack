@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -13,7 +13,7 @@ def cadastrar():
         return f"Sucesso! A máquina '{nome_maquina}' foi cadastrada."
     return render_template('cadastro.html')
 
-    @app.route('/relatorio')
+@app.route('/relatorio')
 def relatorio():
     return render_template('relatorio.html', maquinas=[])
 
