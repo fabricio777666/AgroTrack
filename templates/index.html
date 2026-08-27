@@ -1,7 +1,13 @@
-
-
-{% block title %}Dashboard Mestre - AgroTrack{% endblock %}
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Mestre - AgroTrack</title>
+    <!-- Essa é a linha mágica que puxa o estilo do Hiago! -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="dashboard-container">
 {% block content %}
 <div class="dashboard-container">
     
@@ -126,4 +132,3 @@
         </div>
     </div>
 </div>
-{% endblock %}
