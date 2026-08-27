@@ -21,23 +21,23 @@
             </tr>
         </thead>
         <tbody>
-    {% for m in maquinas %}
-    <tr>
-        <td>{{ m.nome }}</td>
-        <td>{{ m.total_horas }} h</td>
-        <td>R$ {{ "%.2f"|format(m.custo_combustivel) }}</td>
-        <td><strong>R$ {{ "%.2f"|format(m.custo_por_hora) }}</strong></td>
-        <td>{{ m.horimetro_atual }} h</td>
-        <td>
-            {% if m.alerta_manutencao %}
-                <span style="color: red; font-weight: bold;">REVISÃO NECESSÁRIA</span>
-            {% else %}
-                <span style="color: green; font-weight: bold;">✔ Em dia</span>
-            {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
-</tbody>
+            {% for m in maquinas %}
+            <tr>
+                <td>{{ m.nome }}</td>
+                <td>{{ m.total_horas }} h</td>
+                <td>R$ {{ "%.2f"|format(m.custo_combustivel) }}</td>
+                <td><strong>R$ {{ "%.2f"|format(m.custo_por_hora) }}</strong></td>
+                <td>{{ m.horimetro_atual }} h</td>
+                <td>
+                    {% if m.alerta_manutencao %}
+                        <span style="color: red; font-weight: bold;"> REVISÃO NECESSÁRIA</span>
+                    {% else %}
+                        <span style="color: green; font-weight: bold;">✓ Em dia</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
 </body>

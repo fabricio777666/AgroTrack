@@ -36,5 +36,12 @@ def cadastrar():
 def relatorio():
     return render_template('relatorio.html', maquinas=maquinas)
 
+@app.route('/cadastrar', methods=['GET', 'POST'])
+def cadastrar():
+    if request.method == 'POST':
+        nome_maquina = request.form['nome']
+        return f"Sucesso! A máquina '{nome_maquina}' foi cadastrada."
+    return render_template('cadastro.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
