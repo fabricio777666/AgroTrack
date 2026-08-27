@@ -1,0 +1,193 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f2;
+    color: #223022;
+}
+
+.topbar {
+    background: #2f5233;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.topbar .logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.topbar nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.topbar nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.subtitle {
+    color: #567a56;
+    margin-bottom: 1.5rem;
+}
+
+.cards {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    flex: 1;
+    min-width: 180px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-left: 5px solid #4a7c4e;
+}
+
+.card-alerta {
+    border-left-color: #c0392b;
+}
+
+.card-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6b6b6b;
+}
+
+.card-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 0.9rem;
+}
+
+th {
+    background: #eef3ea;
+    color: #2f5233;
+}
+
+.linha-alerta {
+    background: #fdecea;
+}
+
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+    max-width: 420px;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.form-cadastro label {
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    color: #445544;
+}
+
+.form-cadastro input,
+.form-cadastro select {
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.form-cadastro button {
+    margin-top: 1.2rem;
+    padding: 0.7rem;
+    background: #2f5233;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.form-cadastro button:hover {
+    background: #3c6b40;
+}
+
+.acoes {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.btn-editar {
+    background: #4a7c4e;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
+
+.btn-editar:hover {
+    background: #3c6b40;
+}
+
+.acoes form {
+    display: inline;
+}
+
+.btn-deletar {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-deletar:hover {
+    background: #a5301f;
+}
+
+.footer {
+    text-align: center;
+    color: #888;
+    font-size: 0.8rem;
+    padding: 1.5rem 0;
+}
