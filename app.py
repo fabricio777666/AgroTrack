@@ -22,26 +22,19 @@ def cadastrar():
             'marca': marca,
             'horimetro_atual': horimetro,
             'total_horas': horimetro,
-            'custo_combustivel': horimetro * 45.0,  # Valor estimativo para preencher o template
+            'custo_combustivel': horimetro * 45.0, # Valor estimativo
             'custo_por_hora': 112.40,
-            'alerta_manutencao': horimetro > 100    # Regra simples de alerta
+            'alerta_manutencao': False
         }
         
         maquinas.append(maquina)
-        return redirect(url_for('relatorio'))
+        return redirect(url_for('index'))
         
     return render_template('cadastro.html')
 
 @app.route('/relatorio')
 def relatorio():
     return render_template('relatorio.html', maquinas=maquinas)
-
-@app.route('/cadastrar', methods=['GET', 'POST'])
-def cadastrar():
-    if request.method == 'POST':
-        nome_maquina = request.form['nome']
-        return f"Sucesso! A máquina '{nome_maquina}' foi cadastrada."
-    return render_template('cadastro.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
