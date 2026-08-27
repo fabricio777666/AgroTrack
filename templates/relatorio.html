@@ -1,44 +1,57 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Relatório de Custos - AgroTrack</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <h1>📊 Relatório de Custos e Alertas de Manutenção</h1>
+{% block title %}AgroTrack — Relatório{% endblock %}
 
-    <table border="1">
+{% block content %}
+<h1>Relatório Completo da Frota</h1>
+
+<div class="table-wrapper">
+    <table>
         <thead>
             <tr>
                 <th>Máquina</th>
-                <th>Horas Trabalhadas</th>
-                <th>Custo Total (R$)</th>
-                <th>Custo por Hora (R$)</th>
-                <th>Horímetro Atual</th>
-                <th>Status Manutenção</th>
+                <th>Tipo</th>
+                <th>Horímetro atual</th>
+                <th>Consumo (L/h)</th>
+                <th>Diesel (R$/L)</th>
+                <th>Custo/hora</th>
+                <th>Última manutenção</th>
+                <th>Horas desde manutenção</th>
+                <th>Status</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-    {% for m in maquinas %}
-    <tr>
-        <td>{{ m.nome }}</td>
-        <td>{{ m.total_horas }} h</td>
-        <td>R$ {{ "%.2f"|format(m.custo_combustivel) }}</td>
-        <td><strong>R$ {{ "%.2f"|format(m.custo_por_hora) }}</strong></td>
-        <td>{{ m.horimetro_atual }} h</td>
-        <td>
-            {% if m.alerta_manutencao %}
-                <span style="color: red; font-weight: bold;">REVISÃO NECESSÁRIA</span>
+            {% for m in maquinas %}
+            <tr class="{% if m.alerta_manutencao %}linha-alerta{% endif %}">
+                <td>{{ m.nome }}</td>
+                <td>{{ m.tipo }}</td>
+                <td>{{ m.horimetro_atual }} h</td>
+                <td>{{ m.consumo_diesel_litros_hora }}</td>
+                <td>R$ {{ m.custo_diesel_litro }}</td>
+                <td>R$ {{ m.custo_hora }}</td>
+                <td>{{ m.ultima_manutencao_horimetro }} h</td>
+                <td>{{ m.horas_desde_manutencao }} h</td>
+                <td>
+                    {% if m.alerta_manutencao %}
+                        ⚠️ Manutenção necessária
+                    {% else %}
+                        ✅ Em dia
+                    {% endif %}
+                </td>
+                <td class="acoes">
+                    <a href="{{ url_for('editar', maquina_id=m.id) }}" class="btn-editar">Editar</a>
+                    <form method="POST" action="{{ url_for('deletar', maquina_id=m.id) }}" onsubmit="return confirm('Tem certeza que deseja excluir esta máquina?');">
+                        <button type="submit" class="btn-deletar">Excluir</button>
+                    </form>
+                </td>
+            </tr>
             {% else %}
-                <span style="color: green; font-weight: bold;">✔ Em dia</span>
-            {% endif %}
-        </td>
-    </tr>
-    {% endfor %}
-</tbody>
+            <tr>
+                <td colspan="10">Nenhuma máquina cadastrada ainda.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-
-</body>
-</html>
+</div>
+{% endblock %}
