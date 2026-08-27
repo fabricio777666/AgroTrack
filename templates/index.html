@@ -1,16 +1,24 @@
-
-
-{% block title %}Dashboard Mestre - AgroTrack{% endblock %}
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Mestre - AgroTrack</title>
+    <!-- Essa é a linha mágica que puxa o estilo do Hiago! -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="dashboard-container">
 {% block content %}
 <div class="dashboard-container">
     
+
     <div class="dashboard-header page-header">
         <h1>Dashboard Mestre</h1>
         <div class="header-actions">
             <span class="text-muted">Acompanhamento em Tempo Real</span>
         </div>
     </div>
+
 
     <div class="row kpi-row">
         <div class="col-kpi">
@@ -23,6 +31,7 @@
             <div class="card kpi-card gauge-card">
                 <h3>Horas Totais (Safra)</h3>
                 <div class="gauge-placeholder">
+                
                     <span class="gauge-value">3,150h</span>
                 </div>
             </div>
@@ -31,6 +40,7 @@
             <div class="card chart-card">
                 <h3>Distribuição da Frota</h3>
                 <div class="chart-container-donut">
+                  
                     <div class="donut-placeholder"></div>
                     <ul class="chart-legend">
                         <li><span class="dot trator"></span> 6 Tratores</li>
@@ -40,11 +50,14 @@
             </div>
         </div>
     </div>
+
+
     <div class="row main-charts-row">
         <div class="col-chart-bars">
             <div class="card chart-card">
                 <h3>Cadastro de Maquinário (Horas)</h3>
                 <div class="chart-placeholder-bars">
+                   
                 </div>
             </div>
         </div>
@@ -52,10 +65,13 @@
             <div class="card chart-card">
                 <h3>Tendência de Consumo de Combustível (L/h)</h3>
                 <div class="chart-placeholder-line">
+            
                 </div>
             </div>
         </div>
     </div>
+
+
     <div class="row alerts-status-row">
         <div class="col-alerts">
             <div class="card alerts-card">
@@ -96,6 +112,7 @@
             </div>
         </div>
     </div>
+
     <div class="row costs-highlights-row">
         <div class="col-costs">
             <div class="card costs-card">
@@ -115,4 +132,3 @@
         </div>
     </div>
 </div>
-{% endblock %}
