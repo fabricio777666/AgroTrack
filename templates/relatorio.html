@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             {% for m in maquinas %}
-<<<<<<< HEAD
+
             <tr class="{% if m.alerta_manutencao %}linha-alerta{% endif %}">
                 <td>{{ m.nome }}</td>
                 <td>{{ m.tipo }}</td>
@@ -50,7 +50,7 @@
             {% else %}
             <tr>
                 <td colspan="10">Nenhuma máquina cadastrada ainda.</td>
-=======
+
             <tr>
                 <td>{{ m.nome }}</td>
                 <td>{{ m.total_horas }} h</td>
@@ -64,7 +64,6 @@
                         <span style="color: green; font-weight: bold;">✓ Em dia</span>
                     {% endif %}
                 </td>
->>>>>>> 6401895d1ef214010dfc47512589b161978e06f6
             </tr>
             {% endfor %}
         </tbody>
