@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard Mestre - AgroTrack</title>
-    <!-- Essa é a linha mágica que puxa o estilo do Hiago! -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-<div class="dashboard-container">
+{% extends 'base.html' %}
+
 {% block content %}
 <div class="dashboard-container">
-    
 
     <div class="dashboard-header page-header">
         <h1>Dashboard Mestre</h1>
@@ -19,45 +10,38 @@
         </div>
     </div>
 
-
+    <!-- KPIs com dados dinâmicos do Flask -->
     <div class="row kpi-row">
         <div class="col-kpi">
             <div class="card kpi-card">
                 <h3>Frota Ativa</h3>
-                <p class="numero">12 <span>Máquinas</span></p>
+                <p class="numero">{{ total_maquinas }} <span>Máquinas</span></p>
             </div>
         </div>
         <div class="col-gauge">
             <div class="card kpi-card gauge-card">
-                <h3>Horas Totais (Safra)</h3>
+                <h3>Alertas Ativos</h3>
                 <div class="gauge-placeholder">
-                
-                    <span class="gauge-value">3,150h</span>
+                    <span class="gauge-value">{{ alertas_ativos }}</span>
                 </div>
             </div>
         </div>
         <div class="col-chart-donut">
             <div class="card chart-card">
-                <h3>Distribuição da Frota</h3>
+                <h3>Custo Médio / Hora</h3>
                 <div class="chart-container-donut">
-                  
-                    <div class="donut-placeholder"></div>
-                    <ul class="chart-legend">
-                        <li><span class="dot trator"></span> 6 Tratores</li>
-                        <li><span class="dot colheitadeira"></span> 3 Colheitadeiras</li>
-                    </ul>
+                    <p class="numero-lg">R$ {{ custo_medio_hora }}</p>
                 </div>
             </div>
         </div>
     </div>
-
 
     <div class="row main-charts-row">
         <div class="col-chart-bars">
             <div class="card chart-card">
                 <h3>Cadastro de Maquinário (Horas)</h3>
                 <div class="chart-placeholder-bars">
-                   
+                   <!-- Área para gráficos ou resumos -->
                 </div>
             </div>
         </div>
@@ -65,39 +49,47 @@
             <div class="card chart-card">
                 <h3>Tendência de Consumo de Combustível (L/h)</h3>
                 <div class="chart-placeholder-line">
-            
+                   <!-- Área para gráficos ou resumos -->
                 </div>
             </div>
         </div>
     </div>
 
-
+    <!-- Tabela Dinâmica de Maquinário e Alertas -->
     <div class="row alerts-status-row">
         <div class="col-alerts">
             <div class="card alerts-card">
-                <h3>⚠️ ALERTAS DE MANUTENÇÃO</h3>
+                <h3>⚠️ STATUS E MANUTENÇÃO DA FROTA</h3>
                 <table class="data-table alerts-table">
                     <thead>
                         <tr>
-                            <th>Prioridade</th>
-                            <th>Maquinário</th>
-                            <th>Manutenção</th>
-                            <th>Ação</th>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Horímetro</th>
+                            <th>Custo/Hora</th>
+                            <th>Status Manutenção</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="alert-critical">
-                            <td><span class="badge badge-critico">1</span></td>
-                            <td>Colheitadeira 03 - New Holland</td>
-                            <td>Revisão Crítica (10h restantes)</td>
-                            <td><button class="btn-sm btn-danger">Agendar</button></td>
+                        {% for m in maquinas %}
+                        <tr class="{% if m.alerta_manutencao %}alert-critical{% endif %}">
+                            <td>{{ m.nome }}</td>
+                            <td>{{ m.tipo }}</td>
+                            <td>{{ m.horimetro_atual }} h</td>
+                            <td>R$ {{ m.custo_hora }}</td>
+                            <td>
+                                {% if m.alerta_manutencao %}
+                                    <span class="badge badge-critico">Manutenção Necessária</span>
+                                {% else %}
+                                    <span class="badge badge-atencao">OK ({{ m.horas_restantes }}h restantes)</span>
+                                {% endif %}
+                            </td>
                         </tr>
-                        <tr class="alert-warning">
-                            <td><span class="badge badge-atencao">2</span></td>
-                            <td>Trator 01 - John Deere</td>
-                            <td>Troca de Óleo (25h restantes)</td>
-                            <td><button class="btn-sm btn-warning">Agendar</button></td>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">Nenhuma máquina cadastrada.</td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -106,8 +98,12 @@
             <div class="card status-card">
                 <h3>Status em Campo</h3>
                 <ul class="status-list">
-                    <li>Trator 01 <span class="status-dot operacional"></span></li>
-                    <li>Colheitadeira 02 <span class="status-dot manutencao"></span></li>
+                    {% for m in maquinas %}
+                    <li>
+                        {{ m.nome }} 
+                        <span class="status-dot {% if m.alerta_manutencao %}manutencao{% else %}operacional{% endif %}"></span>
+                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -117,7 +113,7 @@
         <div class="col-costs">
             <div class="card costs-card">
                 <h3>Custo por Hora (Média Geral)</h3>
-                <p class="numero-lg">R$ 112,40</p>
+                <p class="numero-lg">R$ {{ custo_medio_hora }}</p>
                 <a href="{{ url_for('relatorio') }}" class="btn-sm btn-success">Relatório Completo</a>
             </div>
         </div>
@@ -126,9 +122,11 @@
                 <h3>Destaques Operacionais</h3>
                 <div class="highlight-item">
                     <span class="icon">🚜</span>
-                    <p>Máquina mais Eficiente: Trator 01 (14.2 L/h)</p>
+                    <p>Total de alertas de manutenção acionados: {{ alertas_ativos }}</p>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+{% endblock %}
