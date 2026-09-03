@@ -1,29 +1,37 @@
-#teste#
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Maquinário - AgroTrack</title>
-</head>
-<body>
-    <h1>🚜 Cadastrar Novo Maquinário</h1>
-    
-    <form action="/cadastrar" method="POST">
-        <label for="nome">Nome/Modelo da Máquina:</label><br>
-        <input type="text" id="nome" name="nome" required><br><br>
+{% block title %}AgroTrack — Cadastrar Máquina{% endblock %}
 
-        <label for="marca">Marca:</label><br>
-        <input type="text" id="marca" name="marca" required><br><br>
+{% block content %}
+<h1>Cadastrar Maquinário</h1>
 
-        <label for="horimetro">Horímetro Inicial (horas):</label><br>
-        <input type="number" id="horimetro" name="horimetro" required><br><br>
+<form method="POST" class="form-cadastro">
+    <label for="nome">Nome da máquina</label>
+    <input type="text" id="nome" name="nome" placeholder="Ex: Trator MF 4275" required>
 
-        <button type="submit">Salvar Máquina</button>
-    </form>
+    <label for="tipo">Tipo</label>
+    <select id="tipo" name="tipo" required>
+        <option value="Trator">Trator</option>
+        <option value="Colheitadeira">Colheitadeira</option>
+        <option value="Pulverizador">Pulverizador</option>
+        <option value="Outro">Outro</option>
+    </select>
 
-    <br>
-    <a href="/">Voltar para a Home</a>
-</body>
-</html>
+    <label for="horimetro_atual">Horímetro atual (horas)</label>
+    <input type="number" step="0.1" id="horimetro_atual" name="horimetro_atual" required>
+
+    <label for="consumo_diesel_litros_hora">Consumo de diesel (litros/hora)</label>
+    <input type="number" step="0.1" id="consumo_diesel_litros_hora" name="consumo_diesel_litros_hora" required>
+
+    <label for="custo_diesel_litro">Custo do diesel (R$/litro)</label>
+    <input type="number" step="0.01" id="custo_diesel_litro" name="custo_diesel_litro" required>
+
+    <label for="ultima_manutencao_horimetro">Horímetro na última manutenção</label>
+    <input type="number" step="0.1" id="ultima_manutencao_horimetro" name="ultima_manutencao_horimetro" required>
+
+    <label for="intervalo_manutencao_horas">Intervalo entre manutenções (horas)</label>
+    <input type="number" step="1" id="intervalo_manutencao_horas" name="intervalo_manutencao_horas" value="250" required>
+
+    <button type="submit">Cadastrar máquina</button>
+</form>
+{% endblock %}
