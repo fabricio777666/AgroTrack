@@ -3,8 +3,7 @@ import database
 
 app = Flask(__name__)
 
-# Garante que a tabela existe e tem dados de exemplo assim que o
-# servidor sobe (funciona tanto local quanto no PythonAnywhere).
+# Garante que a tabela existe e inicializa os dados de exemplo no startup
 database.criar_tabela()
 database.popular_dados_exemplo()
 
@@ -91,13 +90,6 @@ def deletar(maquina_id):
     database.deletar_maquina(maquina_id)
     return redirect(url_for('relatorio'))
 
-
-@app.route('/cadastrar', methods=['GET', 'POST'])
-def cadastrar():
-    if request.method == 'POST':
-        nome_maquina = request.form['nome']
-        return f"Sucesso! A máquina '{nome_maquina}' foi cadastrada."
-    return render_template('cadastro.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
