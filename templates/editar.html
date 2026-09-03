@@ -9,7 +9,7 @@
     <label for="nome">Nome da máquina</label>
     <input type="text" id="nome" name="nome" value="{{ maquina.nome }}" required>
 
-    <label for="tipo">Tipo</label>
+    <label for="tipo">📍 Tipo</label>
     <select id="tipo" name="tipo" required>
         {% for opcao in ["Trator", "Colheitadeira", "Pulverizador", "Outro"] %}
         <option value="{{ opcao }}" {% if maquina.tipo == opcao %}selected{% endif %}>{{ opcao }}</option>
@@ -31,6 +31,6 @@
     <label for="intervalo_manutencao_horas">Intervalo entre manutenções (horas)</label>
     <input type="number" step="1" id="intervalo_manutencao_horas" name="intervalo_manutencao_horas" value="{{ maquina.intervalo_manutencao_horas }}" required>
 
-    <button type="submit">Salvar alterações</button>
+    <button type="submit">💾 Salvar alterações</button>
 </form>
 {% endblock %}
