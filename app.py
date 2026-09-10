@@ -1,29 +1,45 @@
 from flask import Flask, render_template, request, redirect, url_for
+import database  # Importa o arquivo de banco de dados otimizado
 
 app = Flask(__name__)
 
-# Lista para armazenar o maquinário cadastrado em memória
-maquinas = []
+# Inicializa o banco de dados e insere dados de teste se estiver vazio
+database.criar_tabela()
+database.popular_dados_exemplo()
 
 @app.route('/')
 def index():
+    maquinas = database.listar_maquinas()
     return render_template('index.html', maquinas=maquinas)
-
-@app.route('/cadastrar-produto')
-def cadastrar_produto():
-    return render_template('produto.html')
 
 @app.route('/relatorio')
 def relatorio():
+    maquinas = database.listar_maquinas()
     return render_template('relatorio.html', maquinas=maquinas)
 
 @app.route('/cadastrar', methods=['GET', 'POST'])
 def cadastrar():
     if request.method == 'POST':
-        nome_maquina = request.form['nome']
-        maquinas.append({'nome': nome_maquina})
-        return f"Sucesso! A máquina '{nome_maquina}' foi cadastrada."
+        # Captura todos os campos enviados pelo formulário
+        dados = {
+            "nome": request.form['nome'],
+            "tipo": request.form['tipo'],
+            "horimetro_atual": float(request.form['horimetro_atual']),
+            "consumo_diesel_litros_hora": float(request.form['consumo_diesel_litros_hora']),
+            "custo_diesel_litro": float(request.form['custo_diesel_litro']),
+            "ultima_manutencao_horimetro": float(request.form['ultima_manutencao_horimetro']),
+            "intervalo_manutencao_horas": float(request.form['intervalo_manutencao_horas'])
+        }
+        
+        database.inserir_maquina(dados)
+        return redirect(url_for('index'))  # Redireciona para a página inicial após salvar
+        
     return render_template('cadastrar.html')
+
+@app.route('/deletar/<int:id>')
+def deletar(id):
+    database.deletar_maquina(id)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
