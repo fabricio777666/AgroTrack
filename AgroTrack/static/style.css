@@ -1,0 +1,380 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f2;
+    color: #223022;
+}
+
+.topbar {
+    background: #2f5233;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.topbar .logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.topbar nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.topbar nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.subtitle {
+    color: #567a56;
+    margin-bottom: 1.5rem;
+}
+
+.cards {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    flex: 1;
+    min-width: 180px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-left: 5px solid #4a7c4e;
+}
+
+.card-alerta {
+    border-left-color: #c0392b;
+}
+
+.card-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6b6b6b;
+}
+
+.card-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 0.9rem;
+}
+
+th {
+    background: #eef3ea;
+    color: #2f5233;
+}
+
+.linha-alerta {
+    background: #fdecea;
+}
+
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+    max-width: 420px;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.form-cadastro label {
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    color: #445544;
+}
+
+.form-cadastro input,
+.form-cadastro select {
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.form-cadastro button {
+    margin-top: 1.2rem;
+    padding: 0.7rem;
+    background: #2f5233;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.form-cadastro button:hover {
+    background: #3c6b40;
+}
+
+.acoes {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.btn-editar {
+    background: #4a7c4e;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+}
+
+.btn-editar:hover {
+    background: #3c6b40;
+}
+
+.acoes form {
+    display: inline;
+}
+
+.btn-deletar {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-deletar:hover {
+    background: #a5301f;
+}
+
+.footer {
+    text-align: center;
+    color: #888;
+    font-size: 0.8rem;
+    padding: 1.5rem 0;
+}
+
+/* ---------- Dashboard ---------- */
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.page-header h1 {
+    color: #2f5233;
+}
+
+.text-muted {
+    color: #6b6b6b;
+    font-size: 0.9rem;
+}
+
+.row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.row > [class^="col-"] {
+    flex: 1;
+    min-width: 220px;
+}
+
+.kpi-card h3,
+.chart-card h3,
+.alerts-card h3,
+.status-card h3,
+.costs-card h3,
+.highlights-card h3 {
+    color: #2f5233;
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+}
+
+.numero {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2f5233;
+}
+
+.numero span {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #6b6b6b;
+    margin-left: 0.3rem;
+}
+
+.numero-lg {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #2f5233;
+}
+
+.gauge-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+}
+
+.gauge-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #c0392b;
+}
+
+.chart-container-donut,
+.chart-placeholder-bars,
+.chart-placeholder-line {
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a5a5a5;
+    font-size: 0.85rem;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 0.85rem;
+}
+
+.data-table th {
+    background: #eef3ea;
+    color: #2f5233;
+}
+
+.alert-critical {
+    background: #fdecea;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: bold;
+}
+
+.badge-critico {
+    background: #fdecea;
+    color: #c0392b;
+}
+
+.badge-atencao {
+    background: #eaf4ea;
+    color: #2f5233;
+}
+
+.status-list {
+    list-style: none;
+}
+
+.status-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot.operacional {
+    background: #4a7c4e;
+}
+
+.status-dot.manutencao {
+    background: #c0392b;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.highlight-item .icon {
+    font-size: 1.4rem;
+}
+
+.btn-sm {
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.btn-success {
+    background: #2f5233;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #3c6b40;
+}

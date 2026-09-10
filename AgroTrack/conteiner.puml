@@ -1,0 +1,16 @@
+@startuml
+!include <C4/C4_Container>
+
+title Diagrama de Contêiner (C4 Nível 2) - AgroTrack
+
+Person(usuario, "Usuários do Campo", "Produtor Rural ou Operador")
+
+System_Boundary(c1, "Sistema AgroTrack") {
+    Container(web_app, "Aplicação Web / Telas", "Python, HTML, CSS", "Interface onde o usuário cadastra as máquinas, insere as horas trabalhadas e vê os alertas.")
+    ContainerDb(database, "Banco de Dados", "SQLite / Relacional", "Armazena os cadastros de maquinário, registros do horímetro e histórico de manutenção.")
+}
+
+Rel(usuario, web_app, "Acessa e interage via", "Navegador Web")
+Rel(web_app, database, "Lê e grava informações usando", "Consultas SQL")
+
+@enduml
