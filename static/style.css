@@ -36,7 +36,7 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 2rem auto;
     padding: 0 1.5rem;
 }
@@ -53,14 +53,21 @@ body {
     flex-wrap: wrap;
 }
 
-.card {
+.card,
+.kpi-card,
+.chart-card,
+.alerts-card,
+.status-card,
+.costs-card,
+.highlights-card {
     background: #fff;
     border-radius: 10px;
     padding: 1.2rem 1.5rem;
     flex: 1;
-    min-width: 180px;
+    min-width: 260px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     border-left: 5px solid #4a7c4e;
+    overflow: hidden;
 }
 
 .card-alerta {
@@ -82,29 +89,32 @@ body {
 
 .table-wrapper {
     overflow-x: auto;
+    width: 100%;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-table {
+table, .data-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: auto;
 }
 
-th, td {
-    padding: 0.8rem 1rem;
+th, td, .data-table th, .data-table td {
+    padding: 0.7rem 0.8rem;
     text-align: left;
     border-bottom: 1px solid #e5e5e5;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    white-space: normal;
+    word-break: break-word;
 }
 
-th {
+th, .data-table th {
     background: #eef3ea;
     color: #2f5233;
 }
 
-.linha-alerta {
+.linha-alerta, .alert-critical {
     background: #fdecea;
 }
 
@@ -192,8 +202,6 @@ th {
     padding: 1.5rem 0;
 }
 
-/* ---------- Dashboard ---------- */
-
 .dashboard-container {
     display: flex;
     flex-direction: column;
@@ -225,7 +233,8 @@ th {
 
 .row > [class^="col-"] {
     flex: 1;
-    min-width: 220px;
+    min-width: 280px;
+    max-width: 100%;
 }
 
 .kpi-card h3,
@@ -280,28 +289,6 @@ th {
     justify-content: center;
     color: #a5a5a5;
     font-size: 0.85rem;
-}
-
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.data-table th,
-.data-table td {
-    padding: 0.6rem 0.8rem;
-    text-align: left;
-    border-bottom: 1px solid #e5e5e5;
-    font-size: 0.85rem;
-}
-
-.data-table th {
-    background: #eef3ea;
-    color: #2f5233;
-}
-
-.alert-critical {
-    background: #fdecea;
 }
 
 .badge {
