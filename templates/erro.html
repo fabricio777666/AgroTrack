@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Erro {{ codigo }} — AgroTrack{% endblock %}
+{% block content %}
+<h1>Não foi possível concluir ({{ codigo }})</h1>
+<p role="alert">{{ mensagem }}</p>
+<a class="btn-sm btn-success" href="{{ url_for('web.index') if usuario else url_for('web.login') }}">Voltar</a>
+{% endblock %}

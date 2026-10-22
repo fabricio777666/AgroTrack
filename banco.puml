@@ -1,26 +1,66 @@
-@startuml banco 
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-title Modelo de Banco de Dados (DER) - AgroTrack
-
-entity "Maquinario" as maq {
-  * id_maquina : Inteiro <<Chave Primária>>
+@startuml banco
+hide circle
+skinparam linetype ortho
+title AgroTrack — modelo lógico (SQLite local; MariaDB em preparação)
+entity fazendas {
+  * id : INTEGER <<PK>>
   --
-  nome : Texto
-  modelo : Texto
-  marca : Texto
-  ano : Inteiro
+  nome : TEXT
 }
-
-entity "Registro_Horimetro" as reg {
-  * id_registro : Inteiro <<Chave Primária>>
-
-
+entity maquinas {
+  * id : INTEGER <<PK>>
   --
-  id_maquina : Inteiro <<Chave Estrangeira>>
-  horas_trabalhadas : Decimal
-  data_registro : Data
+  fazenda_id : INTEGER <<FK>>
+  nome : TEXT
+  tipo : TEXT
+  horimetro_atual : REAL
+  consumo_diesel_litros_hora : REAL
+  custo_diesel_litro : REAL
+  ultima_manutencao_horimetro : REAL
+  intervalo_manutencao_horas : REAL
 }
-
-maq ||--o reg : "Possui vários"
-
+entity usuarios {
+  * id : INTEGER <<PK>>
+  --
+  fazenda_id : INTEGER <<FK>>
+  nome : TEXT <<UNIQUE>>
+  senha_hash : TEXT
+  perfil : TEXT
+}
+entity registros {
+  * id : INTEGER <<PK>>
+  --
+  maquina_id : INTEGER <<FK>>
+  usuario_id : INTEGER <<FK>>
+  tipo : TEXT
+  descricao : TEXT
+  criado_em : TEXT
+  horimetro_inicial : REAL <<nullable>>
+  horimetro_final : REAL <<nullable>>
+  litros : REAL <<nullable>>
+  valor_total : REAL <<nullable>>
+}
+entity auditoria {
+  * id : INTEGER <<PK>>
+  --
+  fazenda_id : INTEGER <<FK>>
+  usuario_id : INTEGER <<referencia logica, nullable>>
+  acao : TEXT
+  maquina_id : INTEGER <<referencia logica, nullable>>
+  criado_em : TEXT
+}
+maquinas ||--o{ registros
+usuarios ||--o{ registros
+fazendas ||--o{ maquinas
+fazendas ||--o{ usuarios
+fazendas ||--o{ auditoria
+usuarios .. auditoria : referencia logica
+maquinas .. auditoria : referencia logica
+note bottom of auditoria
+  Referências lógicas preservam os eventos
+  mesmo após exclusão de máquina sem diário.
+end note
+note bottom of registros
+  Exclusão da máquina é restrita para preservar o diário.
+end note
 @enduml

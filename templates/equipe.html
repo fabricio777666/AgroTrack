@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Equipe — AgroTrack{% endblock %}
+{% block content %}
+<div class="form-heading"><p class="eyebrow">ACESSO DA FAZENDA</p><h1>Equipe</h1><p class="subtitle">Cadastre quem vai operar ou consultar os dados desta fazenda.</p></div>
+<form method="post" class="form-cadastro">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label for="nome">Nome de usuário</label><input id="nome" name="nome" maxlength="80" autocomplete="off" required>
+  <label for="perfil">Permissão</label><select id="perfil" name="perfil"><option value="operador">Operador — registra e edita</option><option value="leitor">Leitor — consulta</option></select>
+  <label for="senha">Senha inicial · pelo menos 12 caracteres</label><input id="senha" name="senha" type="password" minlength="12" autocomplete="new-password" required>
+  <button type="submit">Adicionar membro</button>
+</form>
+<section class="team-list card"><h2>Membros desta fazenda</h2><ul>{% for membro in membros %}<li><span>{{ membro.nome }}</span><span class="badge badge-atencao">{{ membro.perfil }}</span></li>{% endfor %}</ul></section>
+{% endblock %}

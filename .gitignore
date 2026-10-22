@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Dados e segredos locais (o banco já rastreado deve ser removido do Git após backup).
+instance/
+*.db
+*.db-wal
+*.db-shm
+backups/

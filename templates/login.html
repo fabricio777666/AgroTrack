@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Entrar — AgroTrack{% endblock %}
+{% block content %}
+<div class="form-heading"><p class="eyebrow">ACESSO À PLATAFORMA</p><h1>Entrar no AgroTrack</h1><p class="subtitle">Acompanhe máquinas, custos e manutenções em um só lugar.</p></div>
+<form method="post" class="form-cadastro">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label for="nome">Usuário</label>
+    <input id="nome" name="nome" autocomplete="username" maxlength="80" required>
+    <label for="senha">Senha</label>
+    <input type="password" id="senha" name="senha" autocomplete="current-password" required>
+    <button type="submit">Entrar</button>
+</form>
+<p class="form-footnote">Sua fazenda ainda não tem conta? <a href="{{ url_for('web.cadastro_conta') }}">Criar conta</a></p>
+{% endblock %}

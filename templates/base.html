@@ -8,15 +8,31 @@
 </head>
 <body>
     <header class="topbar">
-        <div class="logo">🌱 AgroTrack</div>
+        <a class="logo" href="{{ url_for('web.index') }}" aria-label="AgroTrack — início"><svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><path d="M20 34V17m0 7C10 24 7 18 7 12c7 0 13 4 13 12Zm0-5c0-8 5-13 14-13 0 8-5 13-14 13Z" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>AgroTrack</span></a>
         <nav>
-            <a href="{{ url_for('index') }}">Dashboard</a>
-            <a href="{{ url_for('cadastrar') }}">Cadastrar Máquina</a>
-            <a href="{{ url_for('relatorio') }}">Relatório</a>
+            {% if usuario %}
+            <a href="{{ url_for('web.index') }}">Dashboard</a>
+            {% if usuario.perfil in ['admin', 'operador'] %}
+            <a href="{{ url_for('web.cadastrar') }}">Cadastrar Máquina</a>
+            {% endif %}
+            <a href="{{ url_for('web.relatorio') }}">Relatório</a>
+            {% if usuario.perfil == 'admin' %}
+            <a href="{{ url_for('web.equipe') }}">Equipe</a>
+            <a href="{{ url_for('web.auditoria') }}">Auditoria</a>
+            {% endif %}
+            <span>{{ usuario.nome }} ({{ usuario.perfil }})</span>
+            <form method="post" action="{{ url_for('web.logout') }}" class="logout-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <button type="submit">Sair</button>
+            </form>
+            {% endif %}
         </nav>
     </header>
 
     <main class="container">
+        {% for categoria, mensagem in get_flashed_messages(with_categories=true) %}
+        <p class="mensagem {{ categoria }}" role="alert">{{ mensagem }}</p>
+        {% endfor %}
         {% block content %}{% endblock %}
     </main>
 

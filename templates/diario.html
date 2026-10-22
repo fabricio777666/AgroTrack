@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Diário de {{ maquina.nome }} — AgroTrack{% endblock %}
+{% block content %}
+<div class="page-header"><div><p class="eyebrow">DIÁRIO DE BORDO</p><h1>{{ maquina.nome }}</h1><p class="subtitle">{{ maquina.tipo }} · Horímetro: {{ maquina.horimetro_atual }} h</p></div><a href="{{ url_for('web.relatorio') }}">← Voltar à frota</a></div>
+<div class="cards">
+    <div class="card"><span class="card-label">Horas lançadas</span><strong class="card-value">{{ '%.1f'|format(horas) }} h</strong></div>
+    <div class="card"><span class="card-label">Abastecimentos</span><strong class="card-value">{{ '%.1f'|format(litros) }} L</strong></div>
+    <div class="card"><span class="card-label">Gastos registrados</span><strong class="card-value">R$ {{ '%.2f'|format(gastos) }}</strong></div>
+</div>
+<p class="subtitle">{% if custo_registrado is not none %}Gastos registrados / horas lançadas: <strong>R$ {{ '%.2f'|format(custo_registrado) }}/h</strong>.{% else %}Registre horas de operação para calcular os gastos por hora.{% endif %} Este indicador considera somente os lançamentos feitos aqui, sem depreciação ou mão de obra.</p>
+{% if maquina.alerta_manutencao %}<p class="mensagem erro" role="status">Manutenção necessária. Ao concluir o serviço, registre a manutenção para reiniciar a contagem no horímetro atual.</p>{% endif %}
+{% if usuario.perfil in ['admin', 'operador'] %}
+<section class="card diary-form-card">
+    <h2>Novo lançamento</h2>
+    <p class="text-muted">O lançamento recebe a data atual. Operações partem do horímetro atual; manutenções confirmam o serviço neste horímetro.</p>
+    <form method="post" class="diary-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <div><label for="tipo">Tipo de registro</label><select id="tipo" name="tipo" required>
+            <option value="operacao" {% if valores.get('tipo') == 'operacao' %}selected{% endif %}>Operação / horas trabalhadas</option>
+            <option value="abastecimento" {% if valores.get('tipo') == 'abastecimento' %}selected{% endif %}>Abastecimento</option>
+            <option value="manutencao" {% if valores.get('tipo') == 'manutencao' %}selected{% endif %}>Manutenção concluída</option>
+        </select></div>
+        <div class="diary-description"><label for="descricao">Descrição do trabalho, abastecimento ou serviço</label><input id="descricao" name="descricao" maxlength="500" value="{{ valores.get('descricao', '') }}" required></div>
+        <div data-tipos="operacao"><label for="horimetro_final">Horímetro final (somente operação)</label><input id="horimetro_final" name="horimetro_final" type="number" min="0" max="1000000000" step="0.1" value="{{ valores.get('horimetro_final', '') }}"></div>
+        <div data-tipos="abastecimento"><label for="litros">Litros (somente abastecimento)</label><input id="litros" name="litros" type="number" min="0.01" max="1000000000" step="0.01" value="{{ valores.get('litros', '') }}"></div>
+        <div data-tipos="abastecimento manutencao"><label for="valor_total">Valor total pago (R$)</label><input id="valor_total" name="valor_total" type="number" min="0" max="1000000000" step="0.01" value="{{ valores.get('valor_total', '') }}"></div>
+        <div class="diary-description"><button class="btn-sm btn-success" type="submit">Registrar no diário</button></div>
+    </form>
+</section>
+<script src="{{ url_for('static', filename='diario.js') }}" defer></script>
+{% endif %}
+<section class="card fleet-card">
+    <div class="section-heading"><div><p class="eyebrow">HISTÓRICO</p><h2>Lançamentos da máquina</h2></div><span class="text-muted">Datas em UTC</span></div>
+    <div class="table-wrapper"><table><thead><tr><th>Data</th><th>Registro</th><th>Descrição</th><th>Uso / quantidade</th><th>Gasto</th><th>Responsável</th></tr></thead>
+    <tbody>{% for r in registros %}<tr>
+        <td>{{ r.criado_em }}</td><td>{{ {'operacao':'Operação', 'abastecimento':'Abastecimento', 'manutencao':'Manutenção'}[r.tipo] }}</td><td>{{ r.descricao }}</td>
+        <td>{% if r.tipo == 'operacao' %}{{ r.horimetro_inicial }} → {{ r.horimetro_final }} h{% elif r.tipo == 'abastecimento' %}{{ r.litros }} L{% else %}{{ r.horimetro_inicial }} h{% endif %}</td>
+        <td>{% if r.valor_total is not none %}R$ {{ '%.2f'|format(r.valor_total) }}{% else %}—{% endif %}</td><td>{{ r.usuario }}</td>
+    </tr>{% else %}<tr><td colspan="6" class="empty-state">Nenhum lançamento. Registre a primeira atividade desta máquina.</td></tr>{% endfor %}</tbody></table></div>
+</section>
+{% endblock %}

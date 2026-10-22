@@ -14,7 +14,7 @@
                 <th>Horímetro atual</th>
                 <th>Consumo (L/h)</th>
                 <th>Diesel (R$/L)</th>
-                <th>Custo/hora</th>
+                <th>Diesel/hora</th>
                 <th>Última manutenção</th>
                 <th>Horas desde manutenção</th>
                 <th>Status</th>
@@ -35,16 +35,22 @@
                 <td>{{ m.horas_desde_manutencao }} h</td>
                 <td>
                     {% if m.alerta_manutencao %}
-                        ⚠️ Manutenção necessária
+                        <span class="badge badge-critico">Manutenção necessária</span>
                     {% else %}
-                        ✅ Em dia
+                        <span class="badge badge-atencao">Em dia</span>
                     {% endif %}
                 </td>
                 <td class="acoes">
-                    <a href="{{ url_for('editar', maquina_id=m.id) }}" class="btn-editar">Editar</a>
-                    <form method="POST" action="{{ url_for('deletar', maquina_id=m.id) }}" onsubmit="return confirm('Tem certeza que deseja excluir esta máquina?');">
+                    <a href="{{ url_for('web.diario', maquina_id=m.id) }}" class="btn-editar">Diário</a>
+                    {% if usuario.perfil in ['admin', 'operador'] %}
+                    <a href="{{ url_for('web.editar', maquina_id=m.id) }}" class="btn-editar">Editar</a>
+                    {% endif %}
+                    {% if usuario.perfil == 'admin' %}
+                    <form method="POST" action="{{ url_for('web.deletar', maquina_id=m.id) }}" onsubmit="return confirm('Tem certeza que deseja excluir esta máquina?');">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                         <button type="submit" class="btn-deletar">Excluir</button>
                     </form>
+                    {% endif %}
                 </td>
             </tr>
             {% else %}

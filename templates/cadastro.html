@@ -3,33 +3,34 @@
 {% block title %}AgroTrack — Cadastrar Máquina{% endblock %}
 
 {% block content %}
-<h1>🚜 Cadastrar Novo Maquinário</h1>
+<div class="form-heading"><p class="eyebrow">FROTA · NOVO CADASTRO</p><h1>Cadastrar máquina</h1><p class="subtitle">Informe os dados da máquina para acompanhar custos e manutenção.</p></div>
 
 <form method="POST" class="form-cadastro">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <label for="nome">Nome/Modelo da máquina</label>
-    <input type="text" id="nome" name="nome" required>
+    <input type="text" id="nome" name="nome" maxlength="120" value="{{ valores.get('nome', '') }}" required>
 
     <label for="tipo">Tipo</label>
     <select id="tipo" name="tipo" required>
         {% for opcao in ["Trator", "Colheitadeira", "Pulverizador", "Outro"] %}
-        <option value="{{ opcao }}">{{ opcao }}</option>
+        <option value="{{ opcao }}" {% if valores.get('tipo') == opcao %}selected{% endif %}>{{ opcao }}</option>
         {% endfor %}
     </select>
 
     <label for="horimetro_atual">Horímetro atual (horas)</label>
-    <input type="number" step="0.1" id="horimetro_atual" name="horimetro_atual" required>
+    <input type="number" min="0" max="1000000000" step="0.1" id="horimetro_atual" name="horimetro_atual" value="{{ valores.get('horimetro_atual', '') }}" required>
 
     <label for="consumo_diesel_litros_hora">Consumo de diesel (litros/hora)</label>
-    <input type="number" step="0.1" id="consumo_diesel_litros_hora" name="consumo_diesel_litros_hora" required>
+    <input type="number" min="0" max="1000000000" step="0.1" id="consumo_diesel_litros_hora" name="consumo_diesel_litros_hora" value="{{ valores.get('consumo_diesel_litros_hora', '') }}" required>
 
     <label for="custo_diesel_litro">Custo do diesel (R$/litro)</label>
-    <input type="number" step="0.01" id="custo_diesel_litro" name="custo_diesel_litro" required>
+    <input type="number" min="0" max="1000000000" step="0.01" id="custo_diesel_litro" name="custo_diesel_litro" value="{{ valores.get('custo_diesel_litro', '') }}" required>
 
     <label for="ultima_manutencao_horimetro">Horímetro na última manutenção</label>
-    <input type="number" step="0.1" id="ultima_manutencao_horimetro" name="ultima_manutencao_horimetro" required>
+    <input type="number" min="0" max="1000000000" step="0.1" id="ultima_manutencao_horimetro" name="ultima_manutencao_horimetro" value="{{ valores.get('ultima_manutencao_horimetro', '') }}" required>
 
     <label for="intervalo_manutencao_horas">Intervalo entre manutenções (horas)</label>
-    <input type="number" step="1" id="intervalo_manutencao_horas" name="intervalo_manutencao_horas" required>
+    <input type="number" min="0.1" max="1000000000" step="0.1" id="intervalo_manutencao_horas" name="intervalo_manutencao_horas" value="{{ valores.get('intervalo_manutencao_horas', '') }}" required>
 
     <button type="submit">Salvar Máquina</button>
 </form>

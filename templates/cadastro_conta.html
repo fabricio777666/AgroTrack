@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Criar conta — AgroTrack{% endblock %}
+{% block content %}
+<div class="form-heading"><p class="eyebrow">PRIMEIRO ACESSO</p><h1>Crie a conta da sua fazenda</h1><p class="subtitle">Os dados de cada fazenda ficam separados. Você será o administrador desta conta.</p></div>
+<form method="post" class="form-cadastro">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label for="fazenda">Nome da fazenda</label>
+  <input id="fazenda" name="fazenda" maxlength="120" autocomplete="organization" value="{{ valores.get('fazenda', '') }}" required>
+  <label for="nome">Nome de usuário</label>
+  <input id="nome" name="nome" maxlength="80" autocomplete="username" value="{{ valores.get('nome', '') }}" required>
+  <label for="senha">Senha · pelo menos 12 caracteres</label>
+  <input id="senha" name="senha" type="password" minlength="12" autocomplete="new-password" required>
+  <label for="confirmacao">Confirme a senha</label>
+  <input id="confirmacao" name="confirmacao" type="password" minlength="12" autocomplete="new-password" required>
+  <button type="submit">Criar conta</button>
+</form>
+<p class="form-footnote">Já tem conta? <a href="{{ url_for('web.login') }}">Entrar</a></p>
+{% endblock %}

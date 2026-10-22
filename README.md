@@ -1,38 +1,115 @@
-# projeto-software-agro-diario-de-bordo
+# AgroTrack
 
-Sistema de diário de bordo e custo operacional de maquinário agrícola
+Diário de bordo e acompanhamento dos gastos de maquinário agrícola.
 
-📌 Sobre o Projeto
-Tratores e colheitadeiras geram custos altíssimos por hora trabalhada, principalmente devido ao consumo de óleo diesel e à falta de controle sobre manutenções preventivas. Esse cenário leva produtores rurais a gastos evitáveis e a quebras inesperadas de máquinas em plena safra.
+Tratores e colheitadeiras precisam de controle das horas de uso, do combustível e das manutenções. O AgroTrack reúne esses lançamentos por máquina e avisa quando o intervalo de manutenção por horímetro é atingido.
 
-O AgroTrack resolve essa necessidade de registro digital do horário (horas de uso) de cada máquina, o acompanhamento do consumo de combustível (L/h) e o disparo de alertas automáticos de manutenção com base no tempo de uso — ajudando o produtor a reduzir custos operacionais e evitar paradas não planejadas.
+## Integrantes
 
-👥 Integrantes do Grupo
-* Fabricio Marques da Cunha
-* Eduardo Fernandes Silva
-* Ian Gustavo Sanajiotto Dias
-* Hiago Rafael Fernandes do Amaral
+- Fabricio Marques da Cunha
+- Eduardo Fernandes Silva
+- Ian Gustavo Sanajiotto Dias
+- Hiago Rafael Fernandes do Amaral
 
-🛠️ Funcionalidades Principais
-* Cadastro de Maquinário
-* Registro de Horário (horas trabalhadas)
-* Registro de Abastecimento e Consumo de Combustível
-* Alertas de Manutenção Preventiva
+## Funcionalidades implementadas
 
-📐 Arquitetura do Sistema
+- Cadastro, consulta, edição e exclusão de máquinas sem histórico.
+- Diário por máquina: operações, abastecimentos e manutenções concluídas.
+- Operações avançam o horímetro; manutenção reinicia a contagem do alerta.
+- Histórico preservado: máquinas com lançamentos não podem ser excluídas. Nelas, o horímetro e a última manutenção só mudam pelo diário.
+- Painel de frota e estimativa de gasto de diesel por hora.
+- Resumo dos gastos e horas efetivamente lançados no diário.
+- Login, perfis de acesso, sessão com validade de 30 minutos, proteção CSRF e auditoria.
+- Cadastro de fazendas com dados separados; cada nova fazenda recebe seu administrador, que pode adicionar operadores e leitores em **Equipe**.
+- API do cadastro de máquinas com GET, POST, PUT e DELETE.
 
-### 1. Diagrama de Contexto (C4 Nível 1)
-* **Responsável:** Fabricio Marques da Cunha  
-![Diagrama de Contexto](contexto.png)
+## Executar localmente
 
-### 2. Diagrama de Contêiner (C4 Nível 2)
-* **Responsável:** Hiago Rafael Fernandes do Amaral  
-![Diagrama de Contêiner](conteiner.png)
+No terminal da pasta do projeto:
 
-### 3. Modelo de Banco de Dados (DER)
-* **Responsável:** Ian Gustavo Sanajiotto Dias  
-![Modelo de Banco de Dados](banco.png)
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements.txt
+.\.venv\Scripts\python -m flask --app app criar-usuario --nome fabricio --perfil admin
+.\.venv\Scripts\python -m flask --app app run
+```
 
-### 4. Fluxograma de Processo
-* **Responsável:** Eduardo Fernandes Silva  
-![Fluxograma de Manutenção](fluxo_manutencao.png)
+A criação solicita uma senha de pelo menos 12 caracteres, com confirmação. Não há senha padrão. Abra http://127.0.0.1:5000 e entre com a conta criada. Uma nova fazenda pode usar **Criar conta** na tela de login. O administrador dessa fazenda pode adicionar seus operadores e leitores na tela **Equipe**. O comando do terminal cria contas para a fazenda inicial (ID 1).
+
+| Perfil | Permissões |
+|---|---|
+| Administrador | Consultar, cadastrar, editar, lançar no diário, excluir máquinas sem histórico e consultar auditoria |
+| Operador | Consultar, cadastrar, editar e lançar no diário |
+| Leitor | Consultar máquinas, indicadores e histórico |
+
+O arquivo `agrotrack.db` existente é preservado. Na inicialização, as tabelas e colunas necessárias são acrescentadas sem apagar máquinas; os dados antigos passam para a fazenda inicial. O banco usa caminho absoluto relativo ao projeto, independentemente da pasta do terminal. Antes de usar com dados importantes, mantenha uma cópia de segurança do arquivo original. O arquivo de dados foi retirado do controle de versão, permanecendo no computador.
+
+Uma base nova começa vazia. Somente para demonstração, pode-se executar:
+
+```powershell
+.\.venv\Scripts\python -m flask --app app dados-exemplo
+```
+
+Esse comando só insere os exemplos se não houver máquinas. Os exemplos não são inseridos automaticamente no início da aplicação.
+
+## Como lançar no diário
+
+1. Cadastre a máquina com o horímetro e o histórico de manutenção iniciais.
+2. Abra **Diário** no relatório ou no painel.
+3. Para uma operação, informe o horímetro final e a descrição. O início é o horímetro atual salvo no sistema.
+4. Para abastecimento, informe litros e valor total pago.
+5. Para manutenção concluída, informe a descrição e o valor total. O serviço é registrado no horímetro atual.
+
+Os lançamentos recebem a data atual do servidor (UTC). Não há lançamento retroativo ou edição/exclusão de histórico nesta versão. Valide os valores antes de registrar.
+
+### Entender os custos
+
+- **Diesel estimado por hora** = consumo cadastrado em L/h × preço cadastrado em R$/L.
+- **Gastos registrados por hora** = total dos abastecimentos e manutenções lançados ÷ horas de operações lançadas.
+- Sem horas lançadas, o segundo indicador não é calculado.
+- Não se trata de custo operacional completo: depreciação, mão de obra, seguros e outros gastos não estão incluídos. Os gastos e horas devem se referir ao mesmo acompanhamento para a média ser útil.
+
+## API de máquinas
+
+A API utiliza a mesma sessão de login do navegador. Faça login por `/login`, obtenha o token em `GET /api/csrf` e envie-o no cabeçalho `X-CSRF-Token` nas alterações. Não envie credenciais ou tokens em URLs.
+
+| Método e caminho | Resultado |
+|---|---|
+| GET /api/maquinas | Lista as máquinas e indicadores |
+| GET /api/maquinas/ID | Consulta uma máquina |
+| POST /api/maquinas | Cadastra; retorna 201 e Location |
+| PUT /api/maquinas/ID | Atualiza o cadastro completo |
+| DELETE /api/maquinas/ID | Exclui máquina sem histórico; retorna 204 |
+
+POST e PUT recebem JSON com `nome`, `tipo`, `horimetro_atual`, `consumo_diesel_litros_hora`, `custo_diesel_litro`, `ultima_manutencao_horimetro` e `intervalo_manutencao_horas`. Tipos aceitos: Trator, Colheitadeira, Pulverizador e Outro. Os formulários HTML usam POST; a API implementa PUT/DELETE explicitamente. As permissões são verificadas no servidor em ambos os caminhos.
+
+## Testes
+
+```powershell
+.\.venv\Scripts\python -m unittest discover -s tests -v
+```
+
+Os testes criam bancos temporários; não alteram os dados do projeto. Cobrem CRUD, cálculos, erros, CSRF, perfis, expiração de sessão, auditoria, diário e separação entre fazendas.
+
+## Publicação e requisitos acadêmicos
+
+Esta revisão foi validada localmente. Deploy e links públicos ainda precisam ser configurados e verificados. Consulte [o checklist do quarto bimestre](docs/REQUISITOS.md).
+
+O [roteiro do pitch](docs/PITCH.md) e as [capturas reais da demonstração](docs/pitch-assets/) estão preparados. Para Banco de Dados II, há um [modelo físico MariaDB](docs/mariadb_schema.sql) com função e gatilho e um [script de usuários do banco](docs/mariadb_usuarios.sql). Esses scripts ainda precisam ser executados e testados em um servidor MariaDB; o aplicativo local continua usando SQLite.
+
+Na hospedagem:
+
+- Instale as dependências e configure a entrada WSGI com `from app import app as application`.
+- Defina `AGROTRACK_ENV=production`, `SECRET_KEY` longa e aleatória, e `AGROTRACK_HTTPS=1` quando servido em HTTPS.
+- `AGROTRACK_DATABASE` permite escolher outro caminho para o arquivo SQLite.
+- O comando `flask run` é para desenvolvimento local. Use o servidor da hospedagem em produção.
+- Nunca publique o segredo, o arquivo de banco ou as credenciais. Há chave local em `instance/`, ignorada pelo Git. O banco local foi retirado do índice do Git após uma cópia segura; arquivos antigos no histórico do repositório ainda exigem cuidado se contiverem dados sensíveis.
+
+## Arquitetura
+
+- Contexto C4 — responsável original: Fabricio Marques da Cunha. [Fonte](contexto.puml) e [imagem](contexto.png).
+- Contêiner C4 — responsável original: Hiago Rafael Fernandes do Amaral. [Fonte](conteiner.puml) e [imagem](conteiner.png).
+- Banco — responsável original: Ian Gustavo Sanajiotto Dias. [Fonte atualizada da implementação](banco.puml). A imagem `banco.png` é do modelo anterior e deve ser regenerada antes da apresentação.
+- Fluxograma de manutenção — responsável original: Eduardo Fernandes Silva. [Fonte](fluxo_manutencao.puml) e [imagem](fluxo_manutencao.png).
+
+Revisar e regenerar os diagramas para a entrega final, incluindo autenticação, diário e auditoria. A revisão assistida não substitui a autoria e a participação individual exigidas na disciplina.
