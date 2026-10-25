@@ -11,6 +11,15 @@ Tratores e colheitadeiras precisam de controle das horas de uso, do combustível
 
 Ian Gustavo Sanajiotto Dias e Hiago Rafael Fernandes do Amaral contribuíram em etapas anteriores e permanecem identificados no histórico e nos diagramas de sua autoria. A equipe atual é formada por Fabricio e Eduardo.
 
+### Contribuições da equipe atual
+
+| Integrante | Trabalho registrado no histórico |
+| --- | --- |
+| Eduardo | Estruturou a base da aplicação com rotas, banco, páginas e estilos ([commit 2e4bbbe](https://github.com/fabricio777666/AgroTrack/commit/2e4bbbe)); trabalhou no registro de uso das máquinas ([commit 5400040](https://github.com/fabricio777666/AgroTrack/commit/5400040), [commit 72be655](https://github.com/fabricio777666/AgroTrack/commit/72be655)) e no [fluxograma de manutenção](https://github.com/fabricio777666/AgroTrack/pull/8). |
+| Fabricio | Evoluiu o cadastro ([commit 472679b](https://github.com/fabricio777666/AgroTrack/commit/472679b)); integrou autenticação, diário, separação entre fazendas, documentação e testes ([commit 57ff17b](https://github.com/fabricio777666/AgroTrack/commit/57ff17b)); preparou o pitch ([commit d888de7](https://github.com/fabricio777666/AgroTrack/commit/d888de7)) e a execução automática dos testes ([commit aaa4b7e](https://github.com/fabricio777666/AgroTrack/commit/aaa4b7e)). |
+
+Esses links mostram partes verificáveis do trabalho de cada um. A quantidade de commits, isoladamente, não mede o esforço nem substitui a revisão das alterações.
+
 ## Organização no GitHub
 
 O [Kanban do AgroTrack](https://github.com/users/fabricio777666/projects/2) acompanha as tarefas. As issues abertas estão distribuídas assim:
