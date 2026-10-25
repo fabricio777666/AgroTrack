@@ -8,8 +8,8 @@ Tratores e colheitadeiras precisam de controle das horas de uso, do combustível
 
 - Fabricio Marques da Cunha
 - Eduardo Fernandes Silva
-- Ian Gustavo Sanajiotto Dias
-- Hiago Rafael Fernandes do Amaral
+
+Ian Gustavo Sanajiotto Dias e Hiago Rafael Fernandes do Amaral contribuíram em etapas anteriores e permanecem identificados no histórico e nos diagramas de sua autoria. A equipe atual é formada por Fabricio e Eduardo.
 
 ## Funcionalidades implementadas
 

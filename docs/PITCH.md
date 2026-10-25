@@ -2,7 +2,7 @@
 
 Esta apresentação descreve a versão local. Não atribua resultados medidos ou endereço público antes de verificá-los.
 
-**Apresentadores:** Fabricio Marques da Cunha e Eduardo Fernandes Silva. Sugestão de divisão: Fabricio apresenta os slides 1 a 4; Eduardo, os slides 5 a 7 e a demonstração. Os demais integrantes permanecem na equipe do projeto.
+**Apresentadores e equipe atual:** Fabricio Marques da Cunha e Eduardo Fernandes Silva. Sugestão de divisão: Fabricio apresenta os slides 1 a 4; Eduardo, os slides 5 a 7 e a demonstração.
 
 ## 1. AgroTrack (25 s)
 **Na tela:** AgroTrack — o controle da frota começa pelos dados. Apresentação: Fabricio Marques da Cunha e Eduardo Fernandes Silva. Fotografia ilustrativa.
