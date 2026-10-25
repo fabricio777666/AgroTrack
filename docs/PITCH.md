@@ -5,7 +5,7 @@ Esta apresentação descreve a versão local. Não atribua resultados medidos ou
 **Apresentadores:** Fabricio Marques da Cunha e Eduardo Fernandes Silva. Sugestão de divisão: Fabricio apresenta os slides 1 a 4; Eduardo, os slides 5 a 7 e a demonstração. Os demais integrantes permanecem na equipe do projeto.
 
 ## 1. AgroTrack (25 s)
-**Na tela:** AgroTrack — máquinas, custos e manutenção em um só lugar. Apresentação: Fabricio Marques da Cunha e Eduardo Fernandes Silva.
+**Na tela:** AgroTrack — o controle da frota começa pelos dados. Apresentação: Fabricio Marques da Cunha e Eduardo Fernandes Silva. Fotografia ilustrativa.
 
 **Fala:** “Nosso projeto é o AgroTrack, uma aplicação web para organizar as informações das máquinas agrícolas e dar mais clareza aos custos e à manutenção.”
 
@@ -32,7 +32,7 @@ Esta apresentação descreve a versão local. Não atribua resultados medidos ou
 ## 6. Segurança e banco (35 s)
 **Na tela:** Senhas em hash, sessão, perfis, proteção dos formulários, auditoria. Banco MariaDB: modelo, usuários com permissões, rotina SQL e gatilho.
 
-**Fala:** “Além das funções principais, protegemos o acesso com senha armazenada em hash, sessão, validação e uma trilha de auditoria. A disciplina de banco pede também uma rotina e um gatilho no próprio servidor; vamos apresentar os scripts e o teste deles.”
+**Fala:** “Além das funções principais, protegemos o acesso com senha armazenada em hash, sessão, validação e uma trilha de auditoria. Para a disciplina de banco, os scripts de MariaDB estão preparados; ainda precisamos executá-los e validá-los no servidor.”
 
 ## 7. Fechamento (25 s)
 **Na tela:** Mais clareza para acompanhar a frota. Demonstração e perguntas.
