@@ -2,8 +2,10 @@
 
 Esta apresentação descreve a versão local. Não atribua resultados medidos ou endereço público antes de verificá-los.
 
+**Apresentadores:** Fabricio Marques da Cunha e Eduardo Fernandes Silva. Sugestão de divisão: Fabricio apresenta os slides 1 a 4; Eduardo, os slides 5 a 7 e a demonstração. Os demais integrantes permanecem na equipe do projeto.
+
 ## 1. AgroTrack (25 s)
-**Na tela:** AgroTrack — máquinas, custos e manutenção em um só lugar. Equipe: Fabricio Marques da Cunha, Eduardo Fernandes Silva, Ian Gustavo Sanajiotto Dias e Hiago Rafael Fernandes do Amaral.
+**Na tela:** AgroTrack — máquinas, custos e manutenção em um só lugar. Apresentação: Fabricio Marques da Cunha e Eduardo Fernandes Silva.
 
 **Fala:** “Nosso projeto é o AgroTrack, uma aplicação web para organizar as informações das máquinas agrícolas e dar mais clareza aos custos e à manutenção.”
 
