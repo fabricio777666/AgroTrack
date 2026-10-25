@@ -11,6 +11,17 @@ Tratores e colheitadeiras precisam de controle das horas de uso, do combustível
 
 Ian Gustavo Sanajiotto Dias e Hiago Rafael Fernandes do Amaral contribuíram em etapas anteriores e permanecem identificados no histórico e nos diagramas de sua autoria. A equipe atual é formada por Fabricio e Eduardo.
 
+## Organização no GitHub
+
+O [Kanban do AgroTrack](https://github.com/users/fabricio777666/projects/2) acompanha as tarefas. As issues abertas estão distribuídas assim:
+
+| Responsável | Issues | Próxima entrega verificável |
+| --- | --- | --- |
+| Eduardo | [#1 — cadastro de máquinas](https://github.com/fabricio777666/AgroTrack/issues/1), [#2 — horímetro](https://github.com/fabricio777666/AgroTrack/issues/2) | Conferir os critérios de aceitação e completar o que faltar, com testes. |
+| Fabricio | [#3 — combustível](https://github.com/fabricio777666/AgroTrack/issues/3), [#4 — manutenção](https://github.com/fabricio777666/AgroTrack/issues/4) | Conferir os critérios de aceitação e completar o que faltar, com testes. |
+
+Para cada entrega, o responsável cria uma branch a partir da `main`, registra commits descritivos com sua própria conta e abre um pull request ligado à issue. O outro integrante revisa antes da integração. Uma issue só vai para **Done** quando seus critérios forem verificados. O histórico anterior permanece intacto e preserva os créditos de quem participou em cada etapa.
+
 ## Funcionalidades implementadas
 
 - Cadastro, consulta, edição e exclusão de máquinas sem histórico.

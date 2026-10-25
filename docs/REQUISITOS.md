@@ -45,7 +45,7 @@ Não substituir esses itens por nomes de funções Python. O banco do projeto fo
 
 ### Processo e participação
 
-- Conferir GitHub Projects, responsáveis e correspondência entre cartões e funcionalidades reais.
+- Manter o GitHub Projects atualizado: issues #1 e #2 com Eduardo; #3 e #4 com Fabricio. Conferir cada critério de aceitação antes de fechar os cartões.
 - Cada integrante deve compreender, desenvolver e registrar suas próprias contribuições. Não criar histórico artificial de commits.
 - A atividade da sprint exige um incremento ainda não entregue pelo grupo. O diário é um candidato, mas essa escolha deve ser alinhada com a professora quando tratado como incremento alternativo.
 
@@ -55,4 +55,4 @@ Não substituir esses itens por nomes de funções Python. O banco do projeto fo
 - Sem lançamentos retroativos, correção de lançamentos ou desfazimento de manutenção. Essa evolução precisa preservar a trilha de auditoria e recalcular o horímetro com segurança.
 - A primeira conta de cada fazenda pode ser criada na interface; ainda falta uma forma segura de convidar operadores/leitores e recuperar senha.
 - Antes de exposição pública mais ampla, complementar a proteção de login contra tentativas repetidas e definir rotina de backup/restauração.
-- Não foram verificados GitHub Projects, deploy, certificados ou todas as entregas de outras disciplinas nesta revisão do código local.
+- O GitHub Projects e os responsáveis foram conferidos em 25/10/2026. Deploy, certificados e todas as entregas de outras disciplinas continuam sem verificação nesta revisão.
