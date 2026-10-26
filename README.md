@@ -1,5 +1,7 @@
 # AgroTrack
 
+**Sistema publicado:** https://bricioso.pythonanywhere.com/ — crie a conta da sua fazenda para entrar. O site usa SQLite na conta gratuita do PythonAnywhere; a etapa de MariaDB exigida em Banco de Dados II continua pendente.
+
 Diário de bordo e acompanhamento dos gastos de maquinário agrícola.
 
 Tratores e colheitadeiras precisam de controle das horas de uso, do combustível e das manutenções. O AgroTrack reúne esses lançamentos por máquina e avisa quando o intervalo de manutenção por horímetro é atingido.
@@ -103,7 +105,7 @@ A API utiliza a mesma sessão de login do navegador. Faça login por `/login`, o
 | PUT /api/maquinas/ID | Atualiza o cadastro completo |
 | DELETE /api/maquinas/ID | Exclui máquina sem histórico; retorna 204 |
 
-POST e PUT recebem JSON com `nome`, `tipo`, `horimetro_atual`, `consumo_diesel_litros_hora`, `custo_diesel_litro`, `ultima_manutencao_horimetro` e `intervalo_manutencao_horas`. Tipos aceitos: Trator, Colheitadeira, Pulverizador e Outro. Os formulários HTML usam POST; a API implementa PUT/DELETE explicitamente. As permissões são verificadas no servidor em ambos os caminhos.
+POST e PUT recebem JSON com `nome`, `modelo`, `tipo`, `horimetro_atual`, `consumo_diesel_litros_hora`, `custo_diesel_litro`, `ultima_manutencao_horimetro` e `intervalo_manutencao_horas`. `marca` e `ano` são opcionais. Tipos aceitos: Trator, Colheitadeira, Pulverizador e Outro. Os formulários HTML usam POST; a API implementa PUT/DELETE explicitamente. As permissões são verificadas no servidor em ambos os caminhos.
 
 ## Testes
 
@@ -115,9 +117,11 @@ Os testes criam bancos temporários; não alteram os dados do projeto. Cobrem CR
 
 ## Publicação e requisitos acadêmicos
 
-Esta revisão foi validada localmente. Deploy e links públicos ainda precisam ser configurados e verificados. Consulte [o checklist do quarto bimestre](docs/REQUISITOS.md).
+O site foi publicado na conta `bricioso` do PythonAnywhere em 26/10/2026. O login e o formulário de criação de fazenda abriram por HTTPS, o arquivo SQLite foi criado no servidor e os 16 testes passaram no ambiente Python 3.13 hospedado. O envio de um cadastro real pelo endereço público ainda não foi testado. Consulte [o checklist do quarto bimestre](docs/REQUISITOS.md).
 
-O [roteiro do pitch](docs/PITCH.md) e as [capturas reais da demonstração](docs/pitch-assets/) estão preparados. Para Banco de Dados II, há um [modelo físico MariaDB](docs/mariadb_schema.sql) com função e gatilho e um [script de usuários do banco](docs/mariadb_usuarios.sql). Esses scripts ainda precisam ser executados e testados em um servidor MariaDB; o aplicativo local continua usando SQLite.
+O [roteiro do pitch](docs/PITCH.md) e as [capturas reais da demonstração](docs/pitch-assets/) estão preparados. Para Banco de Dados II, há um [modelo físico MariaDB](docs/mariadb_schema.sql) com função e gatilho e um [script de usuários do banco](docs/mariadb_usuarios.sql). Esses scripts ainda precisam ser executados e testados em um servidor MariaDB; o aplicativo publicado e o local continuam usando SQLite.
+
+Na conta gratuita do PythonAnywhere, é preciso entrar no painel e clicar em **Run until 1 month from today** antes do vencimento exibido na aba **Web**. Na publicação inicial, a data indicada foi 26/11/2026.
 
 Na hospedagem:
 

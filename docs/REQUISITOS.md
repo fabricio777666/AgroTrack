@@ -17,6 +17,13 @@ https://virtual.ifro.edu.br/ariquemes/mod/page/view.php?id=195831
 - Layout revisto e teste de navegador em tela estreita (390 px).
 - Testes automatizados em bancos descartáveis.
 
+## Publicação verificada em 26/10/2026
+
+- https://bricioso.pythonanywhere.com/ abre o login do AgroTrack por HTTPS; `/cadastro` abre o formulário de nova fazenda.
+- A conta gratuita `bricioso` usa SQLite em `/home/bricioso/agrotrack-data/agrotrack.db`, fora do repositório; o arquivo foi observado no servidor.
+- O servidor foi configurado com Python 3.13, ambiente virtual, chave secreta fora do Git e redirecionamento obrigatório para HTTPS. Os 16 testes automatizados passaram no console da hospedagem.
+- Ainda falta exercitar um cadastro e login reais pelo endereço público. A validade da hospedagem gratuita precisa ser renovada no painel mensalmente.
+
 Controle de acesso, gerenciamento de sessão e auditoria são mecanismos candidatos à demonstração na disciplina de Segurança. A avaliação depende da documentação/demonstração à professora; a implementação local não comprova aprovação.
 
 ## Pendências que impedem declarar o projeto finalizado
@@ -36,8 +43,7 @@ Não substituir esses itens por nomes de funções Python. O banco do projeto fo
 
 ### Publicação e apresentação
 
-- Publicar e testar o sistema completo na hospedagem; configurar HTTPS e os segredos.
-- Inserir o link real do deploy no início do README.
+- Testar cadastro, login e lançamentos reais no endereço público com uma conta criada pela equipe.
 - Preparar pitch e PDF em docs/, conforme a orientação final da professora.
 - Regenerar as imagens PlantUML, corrigir modelos para representar as tabelas reais e incluir QR Code do sistema publicado.
 - Preparar relatório no AVA com links verdadeiros do repositório e deploy.
@@ -55,4 +61,4 @@ Não substituir esses itens por nomes de funções Python. O banco do projeto fo
 - Sem lançamentos retroativos, correção de lançamentos ou desfazimento de manutenção. Essa evolução precisa preservar a trilha de auditoria e recalcular o horímetro com segurança.
 - A primeira conta de cada fazenda pode ser criada na interface; ainda falta uma forma segura de convidar operadores/leitores e recuperar senha.
 - Antes de exposição pública mais ampla, complementar a proteção de login contra tentativas repetidas e definir rotina de backup/restauração.
-- O GitHub Projects e os responsáveis foram conferidos em 25/10/2026. Deploy, certificados e todas as entregas de outras disciplinas continuam sem verificação nesta revisão.
+- O GitHub Projects e os responsáveis foram conferidos em 25/10/2026. A publicação, a página de login e o cadastro foram verificados em 26/10/2026; o fluxo completo com conta real e as entregas das outras disciplinas ainda precisam de verificação.
