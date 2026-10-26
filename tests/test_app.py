@@ -1,5 +1,7 @@
 """Regressões com bancos temporários; nunca usa agrotrack.db do projeto."""
 import os
+import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -27,7 +29,8 @@ class AgroTrackTest(unittest.TestCase):
         with self.app.app_context():
             for perfil in ('admin', 'operador', 'leitor'):
                 database.criar_usuario(perfil, self.hash_senha, perfil)
-        self.dados = dict(nome='Trator de teste', tipo='Trator', horimetro_atual=1250,
+        self.dados = dict(nome='Trator de teste', modelo='MF 4275', marca='Massey Ferguson', ano=2020,
+            tipo='Trator', horimetro_atual=1250,
             consumo_diesel_litros_hora=12.5, custo_diesel_litro=6.1,
             ultima_manutencao_horimetro=1000, intervalo_manutencao_horas=250)
 
@@ -74,6 +77,7 @@ class AgroTrackTest(unittest.TestCase):
         self.entrar()
         r = self.gravar('POST', '/api/maquinas', self.dados)
         self.assertEqual(r.status_code, 201)
+        self.assertEqual((r.json['modelo'], r.json['marca'], r.json['ano']), ('MF 4275', 'Massey Ferguson', 2020))
         self.assertEqual(r.json['custo_hora'], 76.25)
         self.assertTrue(r.json['alerta_manutencao'])
         url = r.headers['Location']
@@ -93,6 +97,21 @@ class AgroTrackTest(unittest.TestCase):
         for acao in ('login', 'maquina_criada', 'maquina_atualizada', 'maquina_excluida'):
             self.assertIn(acao, acoes)
 
+    def test_migracao_preserva_maquina_antiga_e_preenche_modelo(self):
+        legado = str(Path(self.temp.name) / 'legado.db')
+        with closing(sqlite3.connect(legado)) as conexao, conexao:
+            conexao.execute('''CREATE TABLE maquinas (
+                id INTEGER PRIMARY KEY, nome TEXT NOT NULL, tipo TEXT NOT NULL,
+                horimetro_atual REAL NOT NULL, consumo_diesel_litros_hora REAL NOT NULL,
+                custo_diesel_litro REAL NOT NULL, ultima_manutencao_horimetro REAL NOT NULL,
+                intervalo_manutencao_horas REAL NOT NULL)''')
+            conexao.execute('''INSERT INTO maquinas VALUES
+                (1, 'Trator antigo', 'Trator', 100, 10, 6, 0, 250)''')
+        create_app({'TESTING': True, 'SECRET_KEY': 'teste', 'DATABASE': legado})
+        with closing(sqlite3.connect(legado)) as conexao:
+            self.assertEqual(conexao.execute('SELECT nome, modelo, fazenda_id FROM maquinas').fetchone(),
+                             ('Trator antigo', 'Trator antigo', 1))
+
     def test_aviso_de_manutencao_proxima_antes_do_vencimento(self):
         self.entrar()
         self.dados['horimetro_atual'] = 1229
@@ -110,7 +129,8 @@ class AgroTrackTest(unittest.TestCase):
 
     def test_dados_invalidos_nao_gravam(self):
         self.entrar()
-        casos = [('nome', '   '), ('tipo', 'Invalido'), ('custo_diesel_litro', -1),
+        casos = [('nome', '   '), ('modelo', '   '), ('ano', 1800), ('ano', 'inválido'),
+                 ('tipo', 'Invalido'), ('custo_diesel_litro', -1),
                  ('horimetro_atual', 'nan'), ('horimetro_atual', 'inf'),
                  ('horimetro_atual', True), ('intervalo_manutencao_horas', 0),
                  ('ultima_manutencao_horimetro', 2000)]

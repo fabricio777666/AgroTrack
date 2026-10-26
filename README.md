@@ -42,6 +42,7 @@ Para cada entrega, o responsável cria uma branch a partir da `main`, registra c
 - Login, perfis de acesso, sessão com validade de 30 minutos, proteção CSRF e auditoria.
 - Cadastro de fazendas com dados separados; cada nova fazenda recebe seu administrador, que pode adicionar operadores e leitores em **Equipe**.
 - API do cadastro de máquinas com GET, POST, PUT e DELETE.
+- Modelo, marca e ano da máquina no cadastro e no relatório.
 
 ## Executar localmente
 

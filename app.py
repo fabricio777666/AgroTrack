@@ -3,7 +3,7 @@ import math
 import os
 import secrets
 import sqlite3
-from datetime import timedelta
+from datetime import datetime, timedelta
 from functools import wraps
 from pathlib import Path
 
@@ -56,12 +56,27 @@ def ler_formulario(form):
     """Valida HTML e JSON igualmente, inclusive valores NaN/infinito."""
     if not isinstance(form, dict) and not hasattr(form, 'get'):
         raise ValueError('Envie um objeto com os dados da máquina.')
-    nome, tipo = form.get('nome'), form.get('tipo')
+    nome, modelo, tipo = form.get('nome'), form.get('modelo'), form.get('tipo')
     if not isinstance(nome, str) or not 1 <= len(nome.strip()) <= 120:
         raise ValueError('Informe um nome de 1 a 120 caracteres.')
+    if not isinstance(modelo, str) or not 1 <= len(modelo.strip()) <= 120:
+        raise ValueError('Informe um modelo de 1 a 120 caracteres.')
     if tipo not in TIPOS:
         raise ValueError('Selecione um tipo de máquina válido.')
-    dados = {'nome': nome.strip(), 'tipo': tipo}
+    marca = form.get('marca', '')
+    if not isinstance(marca, str) or len(marca.strip()) > 120:
+        raise ValueError('A marca deve ter até 120 caracteres.')
+    ano = form.get('ano', '')
+    if ano not in ('', None):
+        try:
+            ano = int(ano)
+        except (TypeError, ValueError, OverflowError):
+            raise ValueError('Informe um ano válido.') from None
+        if not 1900 <= ano <= datetime.now().year + 1:
+            raise ValueError('O ano da máquina está fora do intervalo válido.')
+    else:
+        ano = None
+    dados = {'nome': nome.strip(), 'modelo': modelo.strip(), 'marca': marca.strip(), 'ano': ano, 'tipo': tipo}
     for campo, rotulo in CAMPOS_NUMERICOS.items():
         valor = form.get(campo)
         try:

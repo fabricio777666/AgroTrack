@@ -10,6 +10,7 @@
         <thead>
             <tr>
                 <th>Máquina</th>
+                <th>Modelo / marca / ano</th>
                 <th>Tipo</th>
                 <th>Horímetro atual</th>
                 <th>Consumo (L/h)</th>
@@ -26,6 +27,7 @@
 
             <tr class="{% if m.alerta_manutencao %}linha-alerta{% endif %}">
                 <td>{{ m.nome }}</td>
+                <td>{{ m.modelo }}{% if m.marca %} · {{ m.marca }}{% endif %}{% if m.ano %} · {{ m.ano }}{% endif %}</td>
                 <td>{{ m.tipo }}</td>
                 <td>{{ m.horimetro_atual }} h</td>
                 <td>{{ m.consumo_diesel_litros_hora }}</td>
@@ -57,7 +59,7 @@
             </tr>
             {% else %}
             <tr>
-                <td colspan="10">Nenhuma máquina cadastrada ainda.</td>
+                <td colspan="11">Nenhuma máquina cadastrada ainda.</td>
             </tr>
             {% endfor %}
         </tbody>

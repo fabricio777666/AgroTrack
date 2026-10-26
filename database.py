@@ -29,6 +29,9 @@ def criar_tabela():
         CREATE TABLE IF NOT EXISTS maquinas (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
+            modelo TEXT NOT NULL DEFAULT '',
+            marca TEXT NOT NULL DEFAULT '',
+            ano INTEGER,
             tipo TEXT NOT NULL,
             horimetro_atual REAL NOT NULL,
             consumo_diesel_litros_hora REAL NOT NULL,
@@ -74,6 +77,14 @@ def criar_tabela():
         colunas = {linha['name'] for linha in conexao.execute(f'PRAGMA table_info({tabela})')}
         if 'fazenda_id' not in colunas:
             conexao.execute(f'ALTER TABLE {tabela} ADD COLUMN fazenda_id INTEGER REFERENCES fazendas(id)')
+    colunas_maquina = {linha['name'] for linha in conexao.execute('PRAGMA table_info(maquinas)')}
+    if 'modelo' not in colunas_maquina:
+        conexao.execute("ALTER TABLE maquinas ADD COLUMN modelo TEXT NOT NULL DEFAULT ''")
+        conexao.execute("UPDATE maquinas SET modelo = nome WHERE modelo = ''")
+    if 'marca' not in colunas_maquina:
+        conexao.execute("ALTER TABLE maquinas ADD COLUMN marca TEXT NOT NULL DEFAULT ''")
+    if 'ano' not in colunas_maquina:
+        conexao.execute('ALTER TABLE maquinas ADD COLUMN ano INTEGER')
     conexao.execute("INSERT OR IGNORE INTO fazendas (id, nome) VALUES (1, 'Fazenda inicial')")
     for tabela in ('usuarios', 'maquinas', 'auditoria'):
         conexao.execute(f'UPDATE {tabela} SET fazenda_id = 1 WHERE fazenda_id IS NULL')
@@ -91,12 +102,12 @@ def popular_dados_exemplo():
     if total == 0:
         conexao.executemany("""
             INSERT INTO maquinas
-            (nome, tipo, horimetro_atual, consumo_diesel_litros_hora,
+            (nome, modelo, tipo, horimetro_atual, consumo_diesel_litros_hora,
              custo_diesel_litro, ultima_manutencao_horimetro, intervalo_manutencao_horas, fazenda_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, 1)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)
         """, [
-            ("Trator MF 4275", "Trator", 1180, 12.5, 6.10, 1000, 250),
-            ("Colheitadeira Case 5088", "Colheitadeira", 940, 28.0, 6.10, 700, 200),
+            ("Trator MF 4275", "MF 4275", "Trator", 1180, 12.5, 6.10, 1000, 250),
+            ("Colheitadeira Case 5088", "Case 5088", "Colheitadeira", 940, 28.0, 6.10, 700, 200),
         ])
         conexao.commit()
     conexao.close()
@@ -120,11 +131,11 @@ def inserir_maquina(dados, usuario_id=None):
     conexao = get_conexao()
     cursor = conexao.execute("""
         INSERT INTO maquinas
-        (nome, tipo, horimetro_atual, consumo_diesel_litros_hora,
+        (nome, modelo, marca, ano, tipo, horimetro_atual, consumo_diesel_litros_hora,
          custo_diesel_litro, ultima_manutencao_horimetro, intervalo_manutencao_horas, fazenda_id)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
-        dados["nome"], dados["tipo"], dados["horimetro_atual"],
+        dados["nome"], dados["modelo"], dados["marca"], dados["ano"], dados["tipo"], dados["horimetro_atual"],
         dados["consumo_diesel_litros_hora"], dados["custo_diesel_litro"],
         dados["ultima_manutencao_horimetro"], dados["intervalo_manutencao_horas"], fazenda_atual(),
     ))
@@ -150,12 +161,12 @@ def atualizar_maquina(maquina_id, dados, usuario_id=None):
         raise ValueError('Esta máquina possui diário. Atualize o horímetro e a manutenção por lançamentos no diário.')
     cursor = conexao.execute("""
         UPDATE maquinas SET
-            nome = ?, tipo = ?, horimetro_atual = ?,
+            nome = ?, modelo = ?, marca = ?, ano = ?, tipo = ?, horimetro_atual = ?,
             consumo_diesel_litros_hora = ?, custo_diesel_litro = ?,
             ultima_manutencao_horimetro = ?, intervalo_manutencao_horas = ?
         WHERE id = ? AND fazenda_id = ?
     """, (
-        dados["nome"], dados["tipo"], dados["horimetro_atual"],
+        dados["nome"], dados["modelo"], dados["marca"], dados["ano"], dados["tipo"], dados["horimetro_atual"],
         dados["consumo_diesel_litros_hora"], dados["custo_diesel_litro"],
         dados["ultima_manutencao_horimetro"], dados["intervalo_manutencao_horas"],
         maquina_id, fazenda_atual(),
