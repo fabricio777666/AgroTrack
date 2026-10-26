@@ -18,13 +18,13 @@
             <tr>
                 <td><strong>{{ m.nome }}</strong><span class="cell-detail">{{ m.tipo }}</span></td>
                 <td>{{ m.horimetro_atual }} h</td><td>R$ {{ '%.2f'|format(m.custo_hora) }}</td>
-                <td>{% if m.alerta_manutencao %}<span class="badge badge-critico">Manutenção necessária</span>{% else %}<span class="badge badge-atencao">Em dia · {{ m.horas_restantes }} h restantes</span>{% endif %}</td>
+                <td>{% if m.alerta_manutencao %}<span class="badge badge-critico">Manutenção necessária</span>{% elif m.manutencao_proxima %}<span class="badge badge-proxima">Próxima · {{ m.horas_restantes }} h restantes</span>{% else %}<span class="badge badge-atencao">Em dia · {{ m.horas_restantes }} h restantes</span>{% endif %}</td>
                 <td><a class="table-link" href="{{ url_for('web.diario', maquina_id=m.id) }}">Abrir diário →</a></td>
             </tr>
             {% else %}<tr><td colspan="5" class="empty-state">Sua frota começa aqui. Cadastre a primeira máquina para acompanhar os indicadores.</td></tr>{% endfor %}</tbody>
         </table></div>
     </section>
-    <div class="info-note"><strong>Como funciona o alerta?</strong><p>O sistema compara as horas desde a última manutenção com o intervalo definido para cada máquina. Registre operações e manutenções no diário para manter os indicadores atualizados.</p></div>
+    <div class="info-note"><strong>Como funciona o alerta?</strong><p>O sistema compara as horas desde a última manutenção com o intervalo definido para cada máquina. Ele avisa quando faltam até 20 horas e sinaliza a manutenção vencida ao atingir o limite. Registre operações e manutenções no diário para manter os indicadores atualizados.</p></div>
     <p class="text-muted">O valor de diesel por hora é uma estimativa. Os gastos com abastecimentos e manutenções ficam no diário; depreciação e mão de obra ainda não entram no cálculo.</p>
 </div>
 {% endblock %}

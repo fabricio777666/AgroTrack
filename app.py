@@ -48,7 +48,8 @@ def calcular_indicadores(maquina):
     restantes = maquina['intervalo_manutencao_horas'] - horas_desde
     return {**maquina, 'custo_hora': round(custo_hora, 2),
             'horas_desde_manutencao': horas_desde, 'horas_restantes': restantes,
-            'alerta_manutencao': restantes <= 0}
+            'alerta_manutencao': restantes <= 0,
+            'manutencao_proxima': 0 < restantes <= 20}
 
 
 def ler_formulario(form):
