@@ -119,6 +119,8 @@ Os testes criam bancos temporários; não alteram os dados do projeto. Cobrem CR
 
 O site foi publicado na conta `bricioso` do PythonAnywhere em 26/10/2026. O login e o formulário de criação de fazenda abriram por HTTPS, o arquivo SQLite foi criado no servidor e os 16 testes passaram no ambiente Python 3.13 hospedado. O envio de um cadastro real pelo endereço público ainda não foi testado. Consulte [o checklist do quarto bimestre](docs/REQUISITOS.md).
 
+Com uma sessão administrativa já aberta, também foram conferidos [cadastro de máquinas, diário, cálculos, edição, exclusão, auditoria e leitura da API no site publicado](docs/TESTE_PUBLICACAO.md).
+
 O [roteiro do pitch](docs/PITCH.md) e as [capturas reais da demonstração](docs/pitch-assets/) estão preparados. Para Banco de Dados II, há um [modelo físico MariaDB](docs/mariadb_schema.sql) com função e gatilho e um [script de usuários do banco](docs/mariadb_usuarios.sql). Esses scripts ainda precisam ser executados e testados em um servidor MariaDB; o aplicativo publicado e o local continuam usando SQLite.
 
 Na conta gratuita do PythonAnywhere, é preciso entrar no painel e clicar em **Run until 1 month from today** antes do vencimento exibido na aba **Web**. Na publicação inicial, a data indicada foi 26/11/2026.
