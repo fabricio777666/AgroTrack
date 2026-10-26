@@ -386,6 +386,7 @@ th {
 .mensagem { padding: 1rem; margin-bottom: 1rem; border-radius: 6px; }
 .mensagem.erro { background: #fdecea; color: #842219; }
 .mensagem.sucesso { background: #eaf4ea; color: #254729; }
+.mensagem.aviso { background: #fff1d8; color: #80551d; }
 .chart-placeholder-bars, .chart-placeholder-line { color: #223022; display: block; }
 .status-list li { gap: 1rem; }
 .row > [class^="col-"] { min-width: 0; flex-basis: 280px; }
@@ -455,6 +456,7 @@ tr:last-child td { border-bottom: 0; }
 .badge { font-size: 0.7rem; padding: 0.35rem 0.65rem; white-space: nowrap; font-weight: 600; }
 .badge-critico { background: #fbede2; color: #8c451b; }
 .badge-atencao { background: #edf4ec; color: #326047; }
+.badge-proxima { background: #fff1d8; color: #80551d; }
 .info-note { border-left: 3px solid #92ad94; background: #edf1e9; padding: 1.1rem 1.3rem; border-radius: 0 8px 8px 0; font-size: 0.83rem; }
 .info-note p { margin-top: 0.3rem; color: #56695b; }
 .btn-sm, .form-cadastro button { font-size: 0.85rem; font-weight: 600; padding: 0.7rem 1rem; border-radius: 7px; border: 0; cursor: pointer; }

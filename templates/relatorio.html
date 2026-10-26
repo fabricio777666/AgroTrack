@@ -36,6 +36,8 @@
                 <td>
                     {% if m.alerta_manutencao %}
                         <span class="badge badge-critico">Manutenção necessária</span>
+                    {% elif m.manutencao_proxima %}
+                        <span class="badge badge-proxima">Próxima · {{ m.horas_restantes }} h restantes</span>
                     {% else %}
                         <span class="badge badge-atencao">Em dia</span>
                     {% endif %}

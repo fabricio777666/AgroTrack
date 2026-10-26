@@ -93,6 +93,21 @@ class AgroTrackTest(unittest.TestCase):
         for acao in ('login', 'maquina_criada', 'maquina_atualizada', 'maquina_excluida'):
             self.assertIn(acao, acoes)
 
+    def test_aviso_de_manutencao_proxima_antes_do_vencimento(self):
+        self.entrar()
+        self.dados['horimetro_atual'] = 1229
+        url = self.gravar('POST', '/api/maquinas', self.dados).headers['Location']
+        self.assertFalse(self.client.get(url).json['manutencao_proxima'])
+        self.dados['horimetro_atual'] = 1230
+        self.gravar('PUT', url, self.dados)
+        self.assertTrue(self.client.get(url).json['manutencao_proxima'])
+        self.assertIn('Próxima · 20.0 h restantes', self.client.get('/relatorio').text)
+        self.dados['horimetro_atual'] = 1250
+        self.gravar('PUT', url, self.dados)
+        maquina = self.client.get(url).json
+        self.assertTrue(maquina['alerta_manutencao'])
+        self.assertFalse(maquina['manutencao_proxima'])
+
     def test_dados_invalidos_nao_gravam(self):
         self.entrar()
         casos = [('nome', '   '), ('tipo', 'Invalido'), ('custo_diesel_litro', -1),

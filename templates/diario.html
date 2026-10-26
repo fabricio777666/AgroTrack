@@ -9,6 +9,7 @@
 </div>
 <p class="subtitle">{% if custo_registrado is not none %}Gastos registrados / horas lançadas: <strong>R$ {{ '%.2f'|format(custo_registrado) }}/h</strong>.{% else %}Registre horas de operação para calcular os gastos por hora.{% endif %} Este indicador considera somente os lançamentos feitos aqui, sem depreciação ou mão de obra.</p>
 {% if maquina.alerta_manutencao %}<p class="mensagem erro" role="status">Manutenção necessária. Ao concluir o serviço, registre a manutenção para reiniciar a contagem no horímetro atual.</p>{% endif %}
+{% if maquina.manutencao_proxima %}<p class="mensagem aviso" role="status">Manutenção próxima: faltam {{ maquina.horas_restantes }} horas. Planeje o serviço antes de atingir o limite.</p>{% endif %}
 {% if usuario.perfil in ['admin', 'operador'] %}
 <section class="card diary-form-card">
     <h2>Novo lançamento</h2>
