@@ -256,6 +256,19 @@ def listar_registros(maquina_id):
         """, (maquina_id, fazenda_atual()))]
 
 
+def resumir_uso_fazenda():
+    """Total de horas operadas e litros abastecidos por máquina da fazenda."""
+    with closing(get_conexao()) as conexao:
+        linhas = conexao.execute("""
+            SELECT r.maquina_id,
+                SUM(CASE WHEN r.tipo = 'operacao' THEN r.horimetro_final - r.horimetro_inicial ELSE 0 END) AS horas,
+                SUM(CASE WHEN r.tipo = 'abastecimento' THEN r.litros ELSE 0 END) AS litros
+            FROM registros r JOIN maquinas m ON m.id = r.maquina_id
+            WHERE m.fazenda_id = ? GROUP BY r.maquina_id
+        """, (fazenda_atual(),))
+        return {linha['maquina_id']: {'horas': linha['horas'], 'litros': linha['litros']} for linha in linhas}
+
+
 def registrar_diario(maquina_id, usuario_id, dados):
     """Atualiza diário e máquina na mesma transação, sem perder lançamentos concorrentes."""
     with closing(get_conexao()) as conexao, conexao:

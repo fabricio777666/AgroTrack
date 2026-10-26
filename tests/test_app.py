@@ -237,12 +237,15 @@ class AgroTrackTest(unittest.TestCase):
         self.assertEqual(maquina['ultima_manutencao_horimetro'], 1260)
         self.assertFalse(maquina['alerta_manutencao'])
         pagina = self.client.get(url).text
+        self.assertIn('5.00 L/h', pagina)
+        self.assertIn('5.00', self.client.get('/relatorio').text)
         self.assertIn('R$ 500.00', pagina)
         self.assertIn('R$ 50.00/h', pagina)
         self.assertIn('10.0 h', pagina)
         self.assertIn('10.0 h trabalhadas', pagina)
         self.assertEqual(lancar(tipo='operacao', descricao='Inválido', horimetro_final=1250).status_code, 400)
         self.assertEqual(lancar(tipo='abastecimento', descricao='Inválido', litros='nan', valor_total=0).status_code, 400)
+        self.assertEqual(lancar(tipo='abastecimento', descricao='Inválido', litros=0, valor_total=0).status_code, 400)
         self.assertEqual(lancar(tipo='manutencao', descricao='Inválido', valor_total=-1).status_code, 400)
         with self.app.app_context():
             conexao = database.get_conexao()

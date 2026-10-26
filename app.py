@@ -181,8 +181,12 @@ def cadastrar():
 @web.get('/relatorio')
 @exigir_perfil()
 def relatorio():
+    resumos = database.resumir_uso_fazenda()
     return render_template('relatorio.html', maquinas=[
-        calcular_indicadores(m) for m in database.listar_maquinas()])
+        {**calcular_indicadores(m),
+         'litros_por_hora_registrados': round(resumos[m['id']]['litros'] / resumos[m['id']]['horas'], 2)
+         if m['id'] in resumos and resumos[m['id']]['horas'] > 0 and resumos[m['id']]['litros'] > 0 else None}
+        for m in database.listar_maquinas()])
 
 
 @web.route('/editar/<int:maquina_id>', methods=['GET', 'POST'])
@@ -340,6 +344,7 @@ def diario(maquina_id):
     litros = sum(r['litros'] or 0 for r in registros)
     return render_template('diario.html', maquina=calcular_indicadores(maquina), registros=registros,
         horas=horas, gastos=gastos, litros=litros, custo_registrado=gastos / horas if horas else None,
+        litros_por_hora_registrados=litros / horas if horas and litros else None,
         valores=request.form if request.method == 'POST' else {}), status
 
 

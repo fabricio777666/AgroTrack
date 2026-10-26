@@ -13,7 +13,8 @@
                 <th>Modelo / marca / ano</th>
                 <th>Tipo</th>
                 <th>Horímetro atual</th>
-                <th>Consumo (L/h)</th>
+                <th>Consumo informado (L/h)</th>
+                <th>Abastecido / horas registradas (L/h)</th>
                 <th>Diesel (R$/L)</th>
                 <th>Diesel/hora</th>
                 <th>Última manutenção</th>
@@ -31,6 +32,7 @@
                 <td>{{ m.tipo }}</td>
                 <td>{{ m.horimetro_atual }} h</td>
                 <td>{{ m.consumo_diesel_litros_hora }}</td>
+                <td>{% if m.litros_por_hora_registrados is not none %}{{ '%.2f'|format(m.litros_por_hora_registrados) }}{% else %}—{% endif %}</td>
                 <td>R$ {{ m.custo_diesel_litro }}</td>
                 <td>R$ {{ m.custo_hora }}</td>
                 <td>{{ m.ultima_manutencao_horimetro }} h</td>
@@ -59,7 +61,7 @@
             </tr>
             {% else %}
             <tr>
-                <td colspan="11">Nenhuma máquina cadastrada ainda.</td>
+                <td colspan="12">Nenhuma máquina cadastrada ainda.</td>
             </tr>
             {% endfor %}
         </tbody>

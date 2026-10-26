@@ -43,6 +43,7 @@ Para cada entrega, o responsável cria uma branch a partir da `main`, registra c
 - Cadastro de fazendas com dados separados; cada nova fazenda recebe seu administrador, que pode adicionar operadores e leitores em **Equipe**.
 - API do cadastro de máquinas com GET, POST, PUT e DELETE.
 - Modelo, marca e ano da máquina no cadastro e no relatório.
+- Média de litros abastecidos por hora de operação lançada, por máquina, no diário e no relatório. Essa média depende de registros do mesmo período e não mede o consumo exato do tanque.
 
 ## Executar localmente
 

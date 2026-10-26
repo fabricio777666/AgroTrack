@@ -5,9 +5,11 @@
 <div class="cards">
     <div class="card"><span class="card-label">Horas lançadas</span><strong class="card-value">{{ '%.1f'|format(horas) }} h</strong></div>
     <div class="card"><span class="card-label">Abastecimentos</span><strong class="card-value">{{ '%.1f'|format(litros) }} L</strong></div>
+    <div class="card"><span class="card-label">Abastecido por hora registrada</span><strong class="card-value">{% if litros_por_hora_registrados is not none %}{{ '%.2f'|format(litros_por_hora_registrados) }} L/h{% else %}—{% endif %}</strong></div>
     <div class="card"><span class="card-label">Gastos registrados</span><strong class="card-value">R$ {{ '%.2f'|format(gastos) }}</strong></div>
 </div>
 <p class="subtitle">{% if custo_registrado is not none %}Gastos registrados / horas lançadas: <strong>R$ {{ '%.2f'|format(custo_registrado) }}/h</strong>.{% else %}Registre horas de operação para calcular os gastos por hora.{% endif %} Este indicador considera somente os lançamentos feitos aqui, sem depreciação ou mão de obra.</p>
+<p class="text-muted">Abastecido por hora é a soma dos litros lançados dividida pelas horas de operação lançadas nesta máquina. É uma média dos registros, não uma medição exata do combustível consumido: depende de abastecimentos e horas do mesmo período.</p>
 {% if maquina.alerta_manutencao %}<p class="mensagem erro" role="status">Manutenção necessária. Ao concluir o serviço, registre a manutenção para reiniciar a contagem no horímetro atual.</p>{% endif %}
 {% if maquina.manutencao_proxima %}<p class="mensagem aviso" role="status">Manutenção próxima: faltam {{ maquina.horas_restantes }} horas. Planeje o serviço antes de atingir o limite.</p>{% endif %}
 {% if usuario.perfil in ['admin', 'operador'] %}
