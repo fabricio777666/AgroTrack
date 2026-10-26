@@ -34,7 +34,7 @@
     <div class="table-wrapper"><table><thead><tr><th>Data</th><th>Registro</th><th>Descrição</th><th>Uso / quantidade</th><th>Gasto</th><th>Responsável</th></tr></thead>
     <tbody>{% for r in registros %}<tr>
         <td>{{ r.criado_em }}</td><td>{{ {'operacao':'Operação', 'abastecimento':'Abastecimento', 'manutencao':'Manutenção'}[r.tipo] }}</td><td>{{ r.descricao }}</td>
-        <td>{% if r.tipo == 'operacao' %}{{ r.horimetro_inicial }} → {{ r.horimetro_final }} h{% elif r.tipo == 'abastecimento' %}{{ r.litros }} L{% else %}{{ r.horimetro_inicial }} h{% endif %}</td>
+        <td>{% if r.tipo == 'operacao' %}{{ r.horimetro_inicial }} → {{ r.horimetro_final }} h <span class="cell-detail">{{ '%.1f'|format(r.horimetro_final - r.horimetro_inicial) }} h trabalhadas</span>{% elif r.tipo == 'abastecimento' %}{{ r.litros }} L{% else %}{{ r.horimetro_inicial }} h{% endif %}</td>
         <td>{% if r.valor_total is not none %}R$ {{ '%.2f'|format(r.valor_total) }}{% else %}—{% endif %}</td><td>{{ r.usuario }}</td>
     </tr>{% else %}<tr><td colspan="6" class="empty-state">Nenhum lançamento. Registre a primeira atividade desta máquina.</td></tr>{% endfor %}</tbody></table></div>
 </section>
